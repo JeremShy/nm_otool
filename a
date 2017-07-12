@@ -1,0 +1,134 @@
+rm -fv ./objnm/nm.o
+./objnm/nm.o
+rm -fv ./objot/otool.o
+rmdir -p ./objnm/ 2> /dev/null || true
+rmdir -p ./objot/ 2> /dev/null || true
+make -C libsrcs/libft clean
+/bin/rm -f ./obj/ft_atoi.o ./obj/ft_strrchr.o ./obj/ft_alloc_str_with_char.o ./obj/ft_strtoupper.o ./obj/ft_itoa_ptr.o ./obj/ft_go_on.o ./obj/ft_itoa_base.o ./obj/ft_itoa_base_ll.o ./obj/ft_itoa_base_ull.o ./obj/ft_alloc_str.o ./obj/ft_bzero.o ./obj/ft_isalnum.o ./obj/ft_isalpha.o ./obj/ft_isascii.o ./obj/ft_isdigit.o ./obj/ft_isprint.o ./obj/ft_memalloc.o ./obj/ft_memccpy.o ./obj/ft_memchr.o ./obj/ft_memcmp.o ./obj/ft_memset.o ./obj/ft_memmove.o ./obj/ft_memdel.o ./obj/ft_memcpy.o ./obj/ft_putchar.o ./obj/ft_putchar_fd.o ./obj/ft_putstr.o ./obj/ft_putstr_fd.o ./obj/ft_strcat.o ./obj/ft_strchr.o ./obj/ft_strclr.o ./obj/ft_strcmp.o ./obj/ft_strcpy.o ./obj/ft_strdel.o ./obj/ft_strdup.o ./obj/ft_strequ.o ./obj/ft_striter.o ./obj/ft_strjoin.o ./obj/ft_strjoinaf1.o ./obj/ft_strjoinaf2.o ./obj/ft_strjoinaf12.o ./obj/ft_strlcat.o ./obj/ft_strlen.o ./obj/ft_wstrlen.o ./obj/ft_strmap.o ./obj/ft_strmapi.o ./obj/ft_strncat.o ./obj/ft_strncmp.o ./obj/ft_strnequ.o ./obj/ft_strncpy.o ./obj/ft_strnew.o ./obj/ft_strnstr.o ./obj/ft_strsplit.o ./obj/ft_strstr.o ./obj/ft_strsub.o ./obj/ft_strtrim.o ./obj/ft_tolower.o ./obj/ft_toupper.o ./obj/ft_putendl.o ./obj/ft_putendl_fd.o ./obj/ft_putnbr.o ./obj/ft_putunbr.o ./obj/ft_putnbr_fd.o ./obj/ft_striteri.o ./obj/ft_lstadd.o ./obj/ft_lstdel.o ./obj/ft_lstdelone.o ./obj/ft_lstiter.o ./obj/ft_lstnew.o ./obj/ft_lstmap.o ./obj/get_next_line.o ./obj/ft_strrevcmp.o ./obj/mallocp.o
+/bin/rm -rf ./obj/
+make -C libsrcs/ft_printf clean
+/bin/rm -f ./obj/ft_printf.o ./obj/is_x.o ./obj/ft_handle_conv.o ./obj/find.o ./obj/ft_handle_conv_2.o ./obj/ft_handle_conv_3.o ./obj/handle_flag.o ./obj/handle_prec.o ./obj/handle_width.o ./obj/find_2.o ./obj/ft_alloc_str.o ./obj/ft_alloc_str_with_char.o ./obj/ft_atoi.o ./obj/ft_itoa_base_ll.o ./obj/ft_itoa_base_ull.o ./obj/ft_itoa_ptr.o ./obj/ft_isdigit.o ./obj/ft_putchar.o ./obj/ft_putstr.o ./obj/ft_strchr.o ./obj/ft_strequ.o ./obj/ft_strdup.o ./obj/ft_strjoinaf12.o ./obj/ft_strjoinaf2.o ./obj/ft_strjoinaf1.o ./obj/ft_strlen.o ./obj/ft_strsub.o ./obj/ft_strtoupper.o ./obj/ft_strcpy.o ./obj/ft_toupper.o
+/bin/rm -rf ./obj/
+rm -fv nm
+rm -fv otool
+make -C libsrcs/libft fclean
+/bin/rm -f ./obj/ft_atoi.o ./obj/ft_strrchr.o ./obj/ft_alloc_str_with_char.o ./obj/ft_strtoupper.o ./obj/ft_itoa_ptr.o ./obj/ft_go_on.o ./obj/ft_itoa_base.o ./obj/ft_itoa_base_ll.o ./obj/ft_itoa_base_ull.o ./obj/ft_alloc_str.o ./obj/ft_bzero.o ./obj/ft_isalnum.o ./obj/ft_isalpha.o ./obj/ft_isascii.o ./obj/ft_isdigit.o ./obj/ft_isprint.o ./obj/ft_memalloc.o ./obj/ft_memccpy.o ./obj/ft_memchr.o ./obj/ft_memcmp.o ./obj/ft_memset.o ./obj/ft_memmove.o ./obj/ft_memdel.o ./obj/ft_memcpy.o ./obj/ft_putchar.o ./obj/ft_putchar_fd.o ./obj/ft_putstr.o ./obj/ft_putstr_fd.o ./obj/ft_strcat.o ./obj/ft_strchr.o ./obj/ft_strclr.o ./obj/ft_strcmp.o ./obj/ft_strcpy.o ./obj/ft_strdel.o ./obj/ft_strdup.o ./obj/ft_strequ.o ./obj/ft_striter.o ./obj/ft_strjoin.o ./obj/ft_strjoinaf1.o ./obj/ft_strjoinaf2.o ./obj/ft_strjoinaf12.o ./obj/ft_strlcat.o ./obj/ft_strlen.o ./obj/ft_wstrlen.o ./obj/ft_strmap.o ./obj/ft_strmapi.o ./obj/ft_strncat.o ./obj/ft_strncmp.o ./obj/ft_strnequ.o ./obj/ft_strncpy.o ./obj/ft_strnew.o ./obj/ft_strnstr.o ./obj/ft_strsplit.o ./obj/ft_strstr.o ./obj/ft_strsub.o ./obj/ft_strtrim.o ./obj/ft_tolower.o ./obj/ft_toupper.o ./obj/ft_putendl.o ./obj/ft_putendl_fd.o ./obj/ft_putnbr.o ./obj/ft_putunbr.o ./obj/ft_putnbr_fd.o ./obj/ft_striteri.o ./obj/ft_lstadd.o ./obj/ft_lstdel.o ./obj/ft_lstdelone.o ./obj/ft_lstiter.o ./obj/ft_lstnew.o ./obj/ft_lstmap.o ./obj/get_next_line.o ./obj/ft_strrevcmp.o ./obj/mallocp.o
+/bin/rm -rf ./obj/
+/bin/rm -f ../../lib/libft.a
+make -C libsrcs/ft_printf fclean
+/bin/rm -f ./obj/ft_printf.o ./obj/is_x.o ./obj/ft_handle_conv.o ./obj/find.o ./obj/ft_handle_conv_2.o ./obj/ft_handle_conv_3.o ./obj/handle_flag.o ./obj/handle_prec.o ./obj/handle_width.o ./obj/find_2.o ./obj/ft_alloc_str.o ./obj/ft_alloc_str_with_char.o ./obj/ft_atoi.o ./obj/ft_itoa_base_ll.o ./obj/ft_itoa_base_ull.o ./obj/ft_itoa_ptr.o ./obj/ft_isdigit.o ./obj/ft_putchar.o ./obj/ft_putstr.o ./obj/ft_strchr.o ./obj/ft_strequ.o ./obj/ft_strdup.o ./obj/ft_strjoinaf12.o ./obj/ft_strjoinaf2.o ./obj/ft_strjoinaf1.o ./obj/ft_strlen.o ./obj/ft_strsub.o ./obj/ft_strtoupper.o ./obj/ft_strcpy.o ./obj/ft_toupper.o
+/bin/rm -rf ./obj/
+rm -f ../../lib/libftprintf.a
+gcc -Werror -Wextra -Wall -g -I./includes -o objnm/nm.o -c srcs/nm/nm.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_atoi.o -c ft_atoi.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strrchr.o -c ft_strrchr.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_alloc_str_with_char.o -c ft_alloc_str_with_char.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strtoupper.o -c ft_strtoupper.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_itoa_ptr.o -c ft_itoa_ptr.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_go_on.o -c ft_go_on.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_itoa_base.o -c ft_itoa_base.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_itoa_base_ll.o -c ft_itoa_base_ll.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_itoa_base_ull.o -c ft_itoa_base_ull.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_alloc_str.o -c ft_alloc_str.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_bzero.o -c ft_bzero.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_isalnum.o -c ft_isalnum.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_isalpha.o -c ft_isalpha.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_isascii.o -c ft_isascii.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_isdigit.o -c ft_isdigit.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_isprint.o -c ft_isprint.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_memalloc.o -c ft_memalloc.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_memccpy.o -c ft_memccpy.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_memchr.o -c ft_memchr.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_memcmp.o -c ft_memcmp.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_memset.o -c ft_memset.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_memmove.o -c ft_memmove.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_memdel.o -c ft_memdel.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_memcpy.o -c ft_memcpy.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_putchar.o -c ft_putchar.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_putchar_fd.o -c ft_putchar_fd.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_putstr.o -c ft_putstr.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_putstr_fd.o -c ft_putstr_fd.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strcat.o -c ft_strcat.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strchr.o -c ft_strchr.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strclr.o -c ft_strclr.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strcmp.o -c ft_strcmp.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strcpy.o -c ft_strcpy.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strdel.o -c ft_strdel.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strdup.o -c ft_strdup.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strequ.o -c ft_strequ.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_striter.o -c ft_striter.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strjoin.o -c ft_strjoin.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strjoinaf1.o -c ft_strjoinaf1.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strjoinaf2.o -c ft_strjoinaf2.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strjoinaf12.o -c ft_strjoinaf12.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strlcat.o -c ft_strlcat.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strlen.o -c ft_strlen.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_wstrlen.o -c ft_wstrlen.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strmap.o -c ft_strmap.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strmapi.o -c ft_strmapi.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strncat.o -c ft_strncat.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strncmp.o -c ft_strncmp.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strnequ.o -c ft_strnequ.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strncpy.o -c ft_strncpy.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strnew.o -c ft_strnew.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strnstr.o -c ft_strnstr.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strsplit.o -c ft_strsplit.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strstr.o -c ft_strstr.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strsub.o -c ft_strsub.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strtrim.o -c ft_strtrim.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_tolower.o -c ft_tolower.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_toupper.o -c ft_toupper.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_putendl.o -c ft_putendl.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_putendl_fd.o -c ft_putendl_fd.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_putnbr.o -c ft_putnbr.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_putunbr.o -c ft_putunbr.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_putnbr_fd.o -c ft_putnbr_fd.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_striteri.o -c ft_striteri.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_lstadd.o -c ft_lstadd.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_lstdel.o -c ft_lstdel.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_lstdelone.o -c ft_lstdelone.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_lstiter.o -c ft_lstiter.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_lstnew.o -c ft_lstnew.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_lstmap.o -c ft_lstmap.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/get_next_line.o -c get_next_line.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/ft_strrevcmp.o -c ft_strrevcmp.c
+gcc -Werror -Wall -Wextra -c -g -I./includes/ -o obj/mallocp.o -c mallocp.c
+ar r ../../lib/libft.a ./obj/ft_atoi.o ./obj/ft_strrchr.o ./obj/ft_alloc_str_with_char.o ./obj/ft_strtoupper.o ./obj/ft_itoa_ptr.o ./obj/ft_go_on.o ./obj/ft_itoa_base.o ./obj/ft_itoa_base_ll.o ./obj/ft_itoa_base_ull.o ./obj/ft_alloc_str.o ./obj/ft_bzero.o ./obj/ft_isalnum.o ./obj/ft_isalpha.o ./obj/ft_isascii.o ./obj/ft_isdigit.o ./obj/ft_isprint.o ./obj/ft_memalloc.o ./obj/ft_memccpy.o ./obj/ft_memchr.o ./obj/ft_memcmp.o ./obj/ft_memset.o ./obj/ft_memmove.o ./obj/ft_memdel.o ./obj/ft_memcpy.o ./obj/ft_putchar.o ./obj/ft_putchar_fd.o ./obj/ft_putstr.o ./obj/ft_putstr_fd.o ./obj/ft_strcat.o ./obj/ft_strchr.o ./obj/ft_strclr.o ./obj/ft_strcmp.o ./obj/ft_strcpy.o ./obj/ft_strdel.o ./obj/ft_strdup.o ./obj/ft_strequ.o ./obj/ft_striter.o ./obj/ft_strjoin.o ./obj/ft_strjoinaf1.o ./obj/ft_strjoinaf2.o ./obj/ft_strjoinaf12.o ./obj/ft_strlcat.o ./obj/ft_strlen.o ./obj/ft_wstrlen.o ./obj/ft_strmap.o ./obj/ft_strmapi.o ./obj/ft_strncat.o ./obj/ft_strncmp.o ./obj/ft_strnequ.o ./obj/ft_strncpy.o ./obj/ft_strnew.o ./obj/ft_strnstr.o ./obj/ft_strsplit.o ./obj/ft_strstr.o ./obj/ft_strsub.o ./obj/ft_strtrim.o ./obj/ft_tolower.o ./obj/ft_toupper.o ./obj/ft_putendl.o ./obj/ft_putendl_fd.o ./obj/ft_putnbr.o ./obj/ft_putunbr.o ./obj/ft_putnbr_fd.o ./obj/ft_striteri.o ./obj/ft_lstadd.o ./obj/ft_lstdel.o ./obj/ft_lstdelone.o ./obj/ft_lstiter.o ./obj/ft_lstnew.o ./obj/ft_lstmap.o ./obj/get_next_line.o ./obj/ft_strrevcmp.o ./obj/mallocp.o
+ranlib ../../lib/libft.a
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_printf.o -c srcss/ft_printf.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/is_x.o -c srcss/is_x.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_handle_conv.o -c srcss/ft_handle_conv.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/find.o -c srcss/find.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_handle_conv_2.o -c srcss/ft_handle_conv_2.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_handle_conv_3.o -c srcss/ft_handle_conv_3.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/handle_flag.o -c srcss/handle_flag.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/handle_prec.o -c srcss/handle_prec.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/handle_width.o -c srcss/handle_width.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/find_2.o -c srcss/find_2.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_alloc_str.o -c srcss/ft_alloc_str.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_alloc_str_with_char.o -c srcss/ft_alloc_str_with_char.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_atoi.o -c srcss/ft_atoi.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_itoa_base_ll.o -c srcss/ft_itoa_base_ll.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_itoa_base_ull.o -c srcss/ft_itoa_base_ull.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_itoa_ptr.o -c srcss/ft_itoa_ptr.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_isdigit.o -c srcss/ft_isdigit.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_putchar.o -c srcss/ft_putchar.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_putstr.o -c srcss/ft_putstr.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_strchr.o -c srcss/ft_strchr.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_strequ.o -c srcss/ft_strequ.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_strdup.o -c srcss/ft_strdup.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_strjoinaf12.o -c srcss/ft_strjoinaf12.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_strjoinaf2.o -c srcss/ft_strjoinaf2.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_strjoinaf1.o -c srcss/ft_strjoinaf1.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_strlen.o -c srcss/ft_strlen.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_strsub.o -c srcss/ft_strsub.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_strtoupper.o -c srcss/ft_strtoupper.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_strcpy.o -c srcss/ft_strcpy.c
+gcc -Wall -Werror -Wextra -c -I./includes -o obj/ft_toupper.o -c srcss/ft_toupper.c
+ar r ../../lib/libftprintf.a ./obj/ft_printf.o ./obj/is_x.o ./obj/ft_handle_conv.o ./obj/find.o ./obj/ft_handle_conv_2.o ./obj/ft_handle_conv_3.o ./obj/handle_flag.o ./obj/handle_prec.o ./obj/handle_width.o ./obj/find_2.o ./obj/ft_alloc_str.o ./obj/ft_alloc_str_with_char.o ./obj/ft_atoi.o ./obj/ft_itoa_base_ll.o ./obj/ft_itoa_base_ull.o ./obj/ft_itoa_ptr.o ./obj/ft_isdigit.o ./obj/ft_putchar.o ./obj/ft_putstr.o ./obj/ft_strchr.o ./obj/ft_strequ.o ./obj/ft_strdup.o ./obj/ft_strjoinaf12.o ./obj/ft_strjoinaf2.o ./obj/ft_strjoinaf1.o ./obj/ft_strlen.o ./obj/ft_strsub.o ./obj/ft_strtoupper.o ./obj/ft_strcpy.o ./obj/ft_toupper.o
+ranlib ../../lib/libftprintf.a
+gcc -Werror -Wextra -Wall -g objnm/nm.o -L ./lib -lft -lftprintf -o nm
+gcc -Werror -Wextra -Wall -g -I./includes -o objot/otool.o -c srcs/otool/otool.c
+make[1]: Nothing to be done for `all'.
+make[1]: Nothing to be done for `all'.
+gcc -Werror -Wextra -Wall -g objot/otool.o -L ./lib -lft -lftprintf -o otool
