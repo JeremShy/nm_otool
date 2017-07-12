@@ -6,7 +6,7 @@
 #    By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/06 15:15:02 by jcamhi            #+#    #+#              #
-#    Updated: 2017/07/12 18:06:07 by jcamhi           ###   ########.fr        #
+#    Updated: 2017/07/12 20:31:48 by jcamhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC_NAME_OT = otool.c
 OBJ_PATH_NM = ./objnm/
 OBJ_PATH_OT = ./objot/
 
-INC_PATH = ./includes
+INC_PATH = ./includes ./libsrcs/libbinary/includes
 
 SRC_PATH_NM = ./srcs/nm/
 SRC_PATH_OT = ./srcs/otool/
@@ -30,7 +30,7 @@ CC = gcc
 
 CFLAGS = -Werror -Wextra -Wall -g
 
-LFLAGS = -lft -lftprintf
+LFLAGS = -lft -lftprintf -lbinary
 
 LIB_DIR=./lib
 
@@ -53,12 +53,14 @@ $(NAME_NM) : $(OBJ_NM)
 	@mkdir -p $(LIB_DIR)
 	@make -C libsrcs/libft 2> /dev/null
 	@make -C libsrcs/ft_printf 2> /dev/null
+	@make -C libsrcs/libbinary 2> /dev/null
 	$(CC) $(CFLAGS) $^ -L $(LIB_DIR) $(LFLAGS) -o $@
 
 $(NAME_OT) : $(OBJ_OT)
 	@mkdir -p $(LIB_DIR)
 	@make -C libsrcs/libft 2>&1 > /dev/null
 	@make -C libsrcs/ft_printf 2>&1 > /dev/null
+	@make -C libsrcs/libbinary 2>&1 > /dev/null
 	$(CC) $(CFLAGS) $^ -L $(LIB_DIR) $(LFLAGS) -o $@
 
 $(OBJ_PATH_NM)%.o: $(SRC_PATH_NM)%.c
@@ -76,12 +78,14 @@ clean:
 	rmdir -p $(OBJ_PATH_OT) 2> /dev/null || true
 	make -C libsrcs/libft clean
 	make -C libsrcs/ft_printf clean
+	make -C libsrcs/libbinary clean
 
 fclean: clean
 	rm -fv $(NAME_NM)
 	rm -fv $(NAME_OT)
 	make -C libsrcs/libft fclean
 	make -C libsrcs/ft_printf fclean
+	make -C libsrcs/libbinary	 fclean
 	@rmdir lib 2> /dev/null || true
 
 re: fclean all
