@@ -1,17 +1,33 @@
 #include <nm.h>
 #include <libbinary.h>
 
-int main(int ac, char **av)
+void	do_nm(char *file)
 {
-	if (ac != 2)
-		return (1);
-	char *binary = map_binary(av[1]);
+	char	*binary;
+
+	binary = map_binary(file);
 	if (!binary)
 	{
 		ft_printf("Error !!!\n");
-		return (1);
 	}
 	else
 		ft_printf("Pas d'erreur\n");
+}
+
+int		main(int ac, char **av)
+{
+	int		i;
+
+	if (ac == 1)
+		do_nm("a.out");
+	else
+	{
+		i = 1;
+		while(i < ac)
+		{
+			do_nm(av[i]);
+			i++;
+		}
+	}
 	return (0);
 }

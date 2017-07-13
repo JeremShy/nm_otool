@@ -19,5 +19,6 @@ char	*map_binary(char *file)
 		return (NULL);
 	}
 	close(fd);
+	printf("binary %s successfully maped.\n", file);
 	return (ret);
 }
