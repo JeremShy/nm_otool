@@ -3,5 +3,7 @@
 
 # include <stdio.h>
 # include <ft_printf.h>
+# include <mach-o/loader.h>
+# include <mach-o/nlist.h>
 
 #endif

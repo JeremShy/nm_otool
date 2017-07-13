@@ -1,6 +1,6 @@
 #include <libbinary.h>
 
-char	*map_binary(char *file)
+char	*map_binary(const char *file)
 {
 	char	*ret;
 	int		fd;
