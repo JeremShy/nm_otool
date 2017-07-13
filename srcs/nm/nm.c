@@ -1,6 +1,15 @@
 #include <nm.h>
 #include <libbinary.h>
 
+char	get_char_for_symtype(uint8_t type)
+{
+	if ((type | 0x0e) == N_UNDF)
+		return ('U');
+	else if ((type | 0x0e) == N_ABS)
+		return ('A');
+	return (' ');
+}
+
 void	output_64(uint32_t symoff, uint32_t stroff, uint32_t nsyms, char *binary)
 {
 	ft_printf("1\n");
