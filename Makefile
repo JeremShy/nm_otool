@@ -6,11 +6,12 @@
 #    By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/06 15:15:02 by jcamhi            #+#    #+#              #
-#    Updated: 2017/07/12 20:31:48 by jcamhi           ###   ########.fr        #
+#    Updated: 2017/07/17 18:39:28 by jcamhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC_NAME_NM = nm.c
+SRC_NAME_NM = nm.c \
+								find_text_data_boundaries_64.c
 
 SRC_NAME_OT = otool.c
 
