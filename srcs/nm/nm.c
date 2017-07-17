@@ -2,15 +2,27 @@
 
 char	get_char_for_symtype(struct nlist_64 elem, t_data data)
 {
-	if ((elem.n_type | 0x0e) == N_UNDF)
-		return ('U');
-	else if ((elem.n_type | 0x0e) == N_ABS)
-		return ('A');
-	else if ((elem.n_type | 0x0e) == N_SECT)
+	// printf("text: %d - %d\n", data.sect_text_beg, data.sect_text_end);
+	// printf("data: %d - %d\n", data.sect_data_beg, data.sect_data_end);
+	// printf("bss: %d - %d\n", data.sect_bss_beg, data.sect_bss_end);
+	if ((elem.n_type & N_STAB) != 0)
 	{
-		(void)data;
 	}
-	return (' ');
+	else if ((elem.n_type & N_TYPE) == N_UNDF)
+		return ('U');
+	else if ((elem.n_type & N_TYPE) == N_ABS)
+		return ('A');
+	else if ((elem.n_type & N_TYPE) == N_SECT)
+	{
+		if (elem.n_sect >= data.sect_text_beg && elem.n_sect <= data.sect_text_end)
+			return ('T');
+		if (elem.n_sect >= data.sect_data_beg && elem.n_sect < data.sect_data_end)
+			return ('D');
+		if (elem.n_sect >= data.sect_bss_beg && elem.n_sect <= data.sect_bss_end)
+			return ('B');
+		return ('S');
+	}
+	return ('X');
 }
 
 void	output_64(uint32_t symoff, uint32_t stroff, uint32_t nsyms, t_data *data)
@@ -48,7 +60,7 @@ void	handle_64(t_data *data)
 	header = (struct mach_header_64*)(data->binary);
 	lc = (void*)(data->binary) + sizeof(*header);
 	i = 0;
-	find_text_data_boundaries_64(data);
+	find_boundaries_64(data);
 	while (i < header->ncmds)
 	{
 		if (lc->cmd == LC_SYMTAB)

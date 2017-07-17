@@ -9,6 +9,7 @@
 # include <stdio.h>
 # include <mach-o/loader.h>
 # include <mach-o/nlist.h>
+# include <mach-o/stab.h>
 
 char	*map_binary(const char *file);
 
