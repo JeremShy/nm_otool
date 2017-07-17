@@ -1,53 +1,23 @@
 #include <nm.h>
 
-char	get_char_for_symtype(struct nlist_64 elem, t_data data)
-{
-	// printf("text: %d - %d\n", data.sect_text_beg, data.sect_text_end);
-	// printf("data: %d - %d\n", data.sect_data_beg, data.sect_data_end);
-	// printf("bss: %d - %d\n", data.sect_bss_beg, data.sect_bss_end);
-	if ((elem.n_type & N_STAB) != 0)
-	{
-	}
-	else if ((elem.n_type & N_TYPE) == N_UNDF)
-		return ('U');
-	else if ((elem.n_type & N_TYPE) == N_ABS)
-		return ('A');
-	else if ((elem.n_type & N_TYPE) == N_SECT)
-	{
-		if (elem.n_sect >= data.sect_text_beg && elem.n_sect <= data.sect_text_end)
-			return ('T');
-		if (elem.n_sect >= data.sect_data_beg && elem.n_sect < data.sect_data_end)
-			return ('D');
-		if (elem.n_sect >= data.sect_bss_beg && elem.n_sect <= data.sect_bss_end)
-			return ('B');
-		return ('S');
-	}
-	return ('X');
-}
 
-void	output_64(uint32_t symoff, uint32_t stroff, uint32_t nsyms, t_data *data)
+void	output_64(t_data *data)
 {
-	ft_printf("1\n");
 	struct nlist_64 *array;
 	char		*strings;
 	uint32_t	i;
 
-	array = (struct nlist_64*)((void*)(data->binary) + symoff);
+	array = (struct nlist_64*)((void*)(data->binary) + data->symoff);
 	i = 0;
-	strings = (char*)((data->binary) + stroff);
-	while(i < nsyms)
+	strings = (char*)((data->binary) + data->stroff);
+	data->list = NULL;
+	while(i < data->nsyms)
 	{
-		if (array[i].n_un.n_strx != 0)
-		{
-			if (array[i].n_value)
-				ft_printf("%016llx ", array[i].n_value);
-			else
-				ft_printf("%16c ", ' ');
-			ft_printf("%c ", get_char_for_symtype(array[i], *data));
-			ft_printf("%s\n", strings + array[i].n_un.n_strx);
-		}
+		data->list = add_elem_end(data, data->list, (uint64_t)(data->symoff + i * sizeof(struct nlist_64)));
 		i++;
 	}
+	data->list = ft_sort(data->list);
+	print_list(data, data->list);
 }
 
 void	handle_64(t_data *data)
@@ -66,7 +36,11 @@ void	handle_64(t_data *data)
 		if (lc->cmd == LC_SYMTAB)
 		{
 			sc = (struct symtab_command*)lc;
-			output_64(sc->symoff, sc->stroff, sc->nsyms, data);
+			data->symoff = sc->symoff;
+			data->stroff = sc->stroff;
+			data->strsize = sc->strsize;
+			data->nsyms = sc->nsyms;
+			output_64(data);
 			return ;
 		}
 		lc = (void*)lc + lc->cmdsize;
@@ -77,16 +51,16 @@ void	handle_64(t_data *data)
 void	do_nm(const char *file)
 {
 	t_data			data;
-	uint32_t		magic;
 
 	data.binary = map_binary(file);
+	data.list = NULL;
 	if (!data.binary)
 	{
 		ft_printf("Error !!!\n");
 		return ;
 	}
-	magic = *(int*)(data.binary);
-	if (magic == MH_MAGIC_64)
+	data.magic = *(uint32_t*)(data.binary);
+	if (data.magic == MH_MAGIC_64)
 	{
 		handle_64(&data);
 	}
