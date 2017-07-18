@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 int a = 0;
+extern int b;
 
 int main()
 {
