@@ -4,6 +4,7 @@
 # include <stdio.h>
 # include <ft_printf.h>
 # include <libbinary.h>
+# include <libft.h>
 
 typedef struct	s_symbole
 {
@@ -22,22 +23,11 @@ typedef struct	s_data
 	void		*binary;
 	t_symbole	*list;
 	uint32_t	magic;
-	uint64_t	begin_text;
-	uint64_t	end_text;
-	uint32_t	sect_text_beg;
-	uint32_t	sect_text_end;
-	uint64_t	begin_data;
-	uint64_t	end_data;
-	uint32_t	sect_data_beg;
-	uint32_t	sect_data_end;
-	uint64_t	begin_bss;
-	uint64_t	end_bss;
-	uint32_t	sect_bss_beg;
-	uint32_t	sect_bss_end;
 	uint32_t	stroff;
 	uint32_t	strsize;
 	uint32_t	symoff;
 	uint32_t	nsyms;
+	char			*sections;
 }				t_data;
 
 void				find_boundaries_64(t_data *data);

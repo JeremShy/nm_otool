@@ -3,22 +3,21 @@
 char	get_char_for_symtype(struct nlist_64 elem, t_data data, t_symbole *ret)
 {
 	if ((elem.n_type & N_STAB) != 0)
-	{
 		ret->is_debug = 1;
-	}
-	else if ((elem.n_type & N_TYPE) == N_UNDF)
+	if ((elem.n_type & N_TYPE) == N_UNDF)
 		return ('U');
 	else if ((elem.n_type & N_TYPE) == N_ABS)
 		return ('A');
 	else if ((elem.n_type & N_TYPE) == N_SECT)
 	{
-		if (elem.n_sect >= data.sect_text_beg && elem.n_sect <= data.sect_text_end)
-			return ('T');
-		if (elem.n_sect >= data.sect_data_beg && elem.n_sect < data.sect_data_end)
-			return ('D');
-		if (elem.n_sect >= data.sect_bss_beg && elem.n_sect <= data.sect_bss_end)
-			return ('B');
-		return ('S');
+		// if (elem.n_sect >= data.sect_text_beg && elem.n_sect <= data.sect_text_end)
+		// 	return ('T');
+		// if (elem.n_sect >= data.sect_data_beg && elem.n_sect < data.sect_data_end)
+		// 	return ('D');
+		// if (elem.n_sect >= data.sect_bss_beg && elem.n_sect <= data.sect_bss_end)
+		// 	return ('B');
+		// return ('S');
+		return (data.sections[elem.n_sect]);
 	}
 	return ('X');
 }
@@ -40,6 +39,8 @@ t_symbole	*init_symbole_for_64(t_data *data, uint64_t offset, t_symbole *ret)
 	ret->value = nl->n_value;
 	ret->is_debug = 0;
 	ret->sym = get_char_for_symtype(*nl, *data, ret);
+	if ((nl->n_type & N_EXT) == 0)
+		ret->sym = ft_tolower(ret->sym);
 	return (ret);
 }
 
