@@ -27,7 +27,7 @@ static int	handle_seg_header_64(t_data *data, struct load_command *lc, uint32_t 
 		// ft_printf("tab[j].segname : %s\n", tab[j].segname);
 		if (ft_strequ(tab[j].segname, "__TEXT"))
 			data->sections[j + i] = 'T';
-		else if (ft_strequ(tab[j].segname, "__DATA") && !ft_strequ(tab[j].sectname, "__common"))
+		else if (ft_strequ(tab[j].segname, "__DATA") && !ft_strequ(tab[j].sectname, "__common") && !ft_strequ(tab[j].sectname, "__const"))
 			data->sections[j + i] = 'D';
 		else if (ft_strequ(tab[j].segname, "__BSS"))
 			data->sections[j + i] = 'B';

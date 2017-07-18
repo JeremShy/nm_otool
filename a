@@ -50,7 +50,7 @@
 000000010007b490 S _aliasspaceflag
 000000010007a978 S _aliastab
 0000000100054d1b T _allocate_colour_buffer
-0000000100074b30 D _alt_sigs
+0000000100074b30 S _alt_sigs
 0000000100057f8c T _appstr
 00000001000786e0 D _argvparam_pm
 000000010007b2f8 S _argzero
@@ -191,7 +191,7 @@
 000000010007a778 S _curtestarg
 000000010003e7ec T _dashgetfn
 0000000100047331 T _decrdumpcount
-00000001000753f0 D _default_watchfmt
+00000001000753f0 S _default_watchfmt
 0000000100040ae8 T _delenv
 00000001000398f8 T _deletebuiltin
 0000000100039c11 T _deleteconddef
@@ -683,10 +683,10 @@
 000000010007b5ac S _nsigtrapped
 000000010007b370 S _nullcmd
 0000000100044c63 T _nullintsetfn
-0000000100074c80 D _nullsethash_gsu
+0000000100074c80 S _nullsethash_gsu
 000000010003edb4 T _nullsethashfn
-0000000100074c08 D _nullsetinteger_gsu
-0000000100074bc0 D _nullsetscalar_gsu
+0000000100074c08 S _nullsetinteger_gsu
+0000000100074bc0 S _nullsetscalar_gsu
 000000010003ebfa T _nullstrsetfn
 000000010003eddc T _nullunsetfn
 000000010007a708 D _nulstring
@@ -925,11 +925,11 @@
 0000000100050a0b T _startpatternscope
 0000000100056d7b T _starttrapscope
                  U _stat$INODE64
-0000000100074c38 D _stdarray_gsu
-0000000100074c20 D _stdfloat_gsu
-0000000100074c68 D _stdhash_gsu
-0000000100074bd8 D _stdinteger_gsu
-0000000100074b90 D _stdscalar_gsu
+0000000100074c38 S _stdarray_gsu
+0000000100074c20 S _stdfloat_gsu
+0000000100074c68 S _stdhash_gsu
+0000000100074bd8 S _stdinteger_gsu
+0000000100074b90 S _stdscalar_gsu
 000000010003eb38 T _stdunsetfn
 000000010007b2f0 S _sticky
 0000000100013571 T _sticky_emulation_differs
@@ -1069,9 +1069,9 @@
 000000010004727e T _useeprog
 000000010004535b T _usernamegetfn
 0000000100045365 T _usernamesetfn
-0000000100074c50 D _vararray_gsu
-0000000100074bf0 D _varinteger_gsu
-0000000100074ba8 D _varscalar_gsu
+0000000100074c50 S _vararray_gsu
+0000000100074bf0 S _varinteger_gsu
+0000000100074ba8 S _varscalar_gsu
                  U _wait3
 0000000100055ff6 T _wait_for_processes
 000000010002ddb4 T _waitforpid
