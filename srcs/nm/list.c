@@ -30,7 +30,7 @@ void	print_list(t_data *data, t_symbole *list)
 	{
 		if (!list->is_debug)
 		{
-			if (list->value)
+			if (list->sym != 'U' && list->sym != 'u')
 				ft_printf("%016llx ", list->value);
 			else
 				ft_printf("%16c ", ' ');

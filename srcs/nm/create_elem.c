@@ -17,7 +17,7 @@ char	get_char_for_symtype(struct nlist_64 elem, t_data data, t_symbole *ret)
 		// if (elem.n_sect >= data.sect_bss_beg && elem.n_sect <= data.sect_bss_end)
 		// 	return ('B');
 		// return ('S');
-		return (data.sections[elem.n_sect]);
+		return (data.sections[elem.n_sect - 1]);
 	}
 	return ('X');
 }
