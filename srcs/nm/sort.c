@@ -3,21 +3,6 @@
 
 long long	ft_rights(t_symbole *elem1, t_symbole *elem2)
 {
-	// if (elem1->rights[0] == 'd' && elem2->rights[0] != 'd')
-	// 	return (1);
-	// else if (elem1->rights[0] != 'd' && elem2->rights[0] == 'd')
-	// 	return (-1);
-	// else
-	// {
-	// 	if (!opt.t && !opt.r)
-	// 		return (ft_lexic(elem1, elem2, opt));
-	// 	else if (opt.t && !opt.r)
-	// 		return (ft_mod(elem1, elem2, opt));
-	// 	else if (opt.t && opt.r)
-	// 		return (ft_mod_inv(elem1, elem2, opt));
-	// 	else if (!opt.t && opt.r)
-	// 		return (ft_lexic_inv(elem1, elem2, opt));
-	// }
  if (!elem1->str && !elem2->str)
 		return (ft_strcmp("", ""));
 	else if (!elem1->str)
@@ -25,7 +10,12 @@ long long	ft_rights(t_symbole *elem1, t_symbole *elem2)
 	else if (!elem2->str)
 		return (ft_strcmp(elem1->str, ""));
 	else
-		return (ft_strcmp(elem1->str, elem2->str));
+	{
+		if (ft_strcmp(elem1->str, elem2->str) != 0)
+			return (ft_strcmp(elem1->str, elem2->str));
+		else
+			return (elem1->value - elem2->value);
+	}
 	return (0);
 }
 

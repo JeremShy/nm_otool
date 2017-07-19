@@ -15,6 +15,7 @@ typedef struct	s_symbole
 	char			sym;
 	int64_t		n_strx;
 	int				is_debug;
+	uint32_t	magic;
 	struct s_symbole	*next;
 }				t_symbole;
 
@@ -30,11 +31,18 @@ typedef struct	s_data
 	char			*sections;
 }				t_data;
 
-void				find_boundaries_64(t_data *data);
+void				find_boundaries_64(t_data *data, uint64_t offset);
+void				find_boundaries_32(t_data *data, uint64_t offset);
+void				handle_32(t_data *data, uint64_t offset);
+void				handle_64(t_data *data, uint64_t offset);
+void				create_list_64(t_data *data, uint64_t offset);
+void				create_list_32(t_data *data, uint64_t offset);
 t_symbole		*create_elem(t_data *data, uint64_t offset);
 void				add_elem_start(t_data *data, t_symbole **list, uint64_t offset);
 t_symbole		*add_elem_end(t_data *data, t_symbole *list, uint64_t offset);
 void				print_list(t_data *data, t_symbole *list);
+// void				print_list_64(t_data *data, t_symbole *list);
 t_symbole		*ft_sort(t_symbole *list);
+void				handle_fat_cigam(t_data *data);
 
 #endif

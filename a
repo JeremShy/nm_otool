@@ -24,7 +24,7 @@
 0000000100001410 t _AvailableMetersPanel_eventHandler
 00000001000015c0 T _AvailableMetersPanel_new
 0000000100016a38 d _BarMeterMode
-0000000100012c02 t _BarMeterMode_characters
+0000000100012c02 s _BarMeterMode_characters
 00000001000061c0 t _BarMeterMode_draw
 0000000100016fb8 D _BatteryMeter_attributes
 0000000100016fc0 D _BatteryMeter_class
@@ -126,11 +126,11 @@
 0000000100004320 T _FunctionBar_setLabel
 0000000100004550 T _FunctionBar_synthesizeEvent
 0000000100016a68 d _GraphMeterMode
-0000000100018a40 d _GraphMeterMode_dots
+0000000100018a40 b _GraphMeterMode_dots
 0000000100016c30 d _GraphMeterMode_dotsAscii
 0000000100016b60 d _GraphMeterMode_dotsUtf8
 0000000100006880 t _GraphMeterMode_draw
-0000000100018a48 d _GraphMeterMode_pixPerRow
+0000000100018a48 b _GraphMeterMode_pixPerRow
 0000000100004630 T _Hashtable_delete
 0000000100004800 T _Hashtable_foreach
 00000001000047c0 T _Hashtable_get
@@ -173,7 +173,7 @@
 000000010000ffa0 T _InfoScreen_init
 0000000100010300 T _InfoScreen_run
 0000000100016a80 d _LEDMeterMode
-0000000100018a50 d _LEDMeterMode_digits
+0000000100018a50 b _LEDMeterMode_digits
 0000000100016d70 d _LEDMeterMode_digitsAscii
 0000000100016c80 d _LEDMeterMode_digitsUtf8
 0000000100006ca0 t _LEDMeterMode_draw
@@ -229,7 +229,7 @@
 0000000100006fd0 t _MetersPanel_eventHandler
 0000000100007450 T _MetersPanel_new
 0000000100006f50 T _MetersPanel_setMoving
-0000000100018a58 d _Meters_movingBar
+0000000100018a58 b _Meters_movingBar
 0000000100018610 S _Object_class
 0000000100017450 D _OpenFilesScreen_class
 000000010000de00 T _OpenFilesScreen_delete
@@ -317,7 +317,7 @@
 0000000100009930 T _Process_sendSignal
 0000000100009890 T _Process_setPriority
 0000000100008590 T _Process_setupColumnWidths
-0000000100018a60 d _Process_titleBuffer
+0000000100018a60 b _Process_titleBuffer
 0000000100009880 T _Process_toggleTag
 0000000100008d00 T _Process_writeField
 000000010000a4f0 T _RichString_append
@@ -447,7 +447,7 @@
                  U _calloc
                  U _cbreak
                  U _ceil
-0000000100018bf0 d _comparisons
+0000000100018bf0 b _comparisons
                  U _curs_set
                  U _define_key
                  U _difftime

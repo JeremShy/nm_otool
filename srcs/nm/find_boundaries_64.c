@@ -10,27 +10,15 @@ static int	handle_seg_header_64(t_data *data, struct load_command *lc, uint32_t 
 	sc = (struct segment_command_64*)lc;
 	tab = (void*)sc + sizeof(struct segment_command_64);
 	if (sc->nsects == 0)
-	{
-		// // ft_printf("sc->segname : %s\n", sc->segname);
-		// if (ft_strequ(sc->segname, "__TEXT"))
-		// 	data->sections[j + i] = 'T';
-		// else if (ft_strequ(sc->segname, "__DATA"))
-		// 	data->sections[j + i] = 'D';
-		// else if (ft_strequ(sc->segname, "__BSS"))
-		// 	data->sections[j + i] = 'B';
-		// else
-		// 	data->sections[j + i] = 'S';
 		return (i);
-	}
 	while (j < sc->nsects)
 	{
-		// ft_printf("tab[j].segname : %s\n", tab[j].segname);
-		if (ft_strequ(tab[j].segname, "__TEXT"))
+		if (ft_strequ(tab[j].sectname, "__text"))
 			data->sections[j + i] = 'T';
-		else if (ft_strequ(tab[j].segname, "__DATA") && !ft_strequ(tab[j].sectname, "__common") && !ft_strequ(tab[j].sectname, "__const"))
-			data->sections[j + i] = 'D';
-		else if (ft_strequ(tab[j].segname, "__BSS"))
+		else if (ft_strequ(tab[j].sectname, "__bss"))
 			data->sections[j + i] = 'B';
+		else if (ft_strequ(tab[j].sectname, "__data"))
+			data->sections[j + i] = 'D';
 		else
 			data->sections[j + i] = 'S';
 		j++;
@@ -38,7 +26,7 @@ static int	handle_seg_header_64(t_data *data, struct load_command *lc, uint32_t 
 	return (i + j);
 }
 
-void	find_boundaries_64(t_data *data)
+void	find_boundaries_64(t_data *data, uint64_t offset)
 {
 	struct mach_header_64			*header;
 	struct load_command				*lc;
@@ -46,8 +34,8 @@ void	find_boundaries_64(t_data *data)
 	uint32_t									j;
 	// char											*ch;
 
-	header = (struct mach_header_64*)(data->binary);
-	lc = (void*)(data->binary) + sizeof(*header);
+	header = (struct mach_header_64*)(data->binary + offset);
+	lc = (void*)header + sizeof(struct mach_header_64);
 	i = 0;
 	j = 0;
 	if (!(data->sections = (char*)malloc(header->ncmds + 1)))
@@ -63,8 +51,4 @@ void	find_boundaries_64(t_data *data)
 		lc = (void*)lc + lc->cmdsize;
 		i++;
 	}
-	// write(1, data->sections, j);
-	// write(1, "\n", 1);
-	// if ((ch = ft_strrchr(data->sections, 'D')))
-	// 	*ch = 'S';
 }

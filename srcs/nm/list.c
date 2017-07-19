@@ -31,9 +31,19 @@ void	print_list(t_data *data, t_symbole *list)
 		if (!list->is_debug)
 		{
 			if (list->sym != 'U' && list->sym != 'u')
-				ft_printf("%016llx ", list->value);
+			{
+				if (list->magic == MH_MAGIC_64)
+					ft_printf("%016llx ", list->value);
+				else if (list->magic == MH_MAGIC)
+					ft_printf("%08llx ", list->value);
+			}
 			else
+			{
+				if (list->magic == MH_MAGIC_64)
 				ft_printf("%16c ", ' ');
+				else if (list->magic == MH_MAGIC)
+					ft_printf("%8c ", ' ');
+			}
 			ft_printf("%c ", list->sym);
 	 		ft_printf("%s\n", list->str);
 		}
@@ -41,3 +51,21 @@ void	print_list(t_data *data, t_symbole *list)
 	}
 	data = NULL;
 }
+
+// void	print_list_32(t_data *data, t_symbole *list)
+// {
+// 	while(list)
+// 	{
+// 		if (!list->is_debug)
+// 		{
+// 			if (list->sym != 'U' && list->sym != 'u')
+// 				ft_printf("%08llx ", list->value);
+// 			else
+// 				ft_printf("%8c ", ' ');
+// 			ft_printf("%c ", list->sym);
+// 	 		ft_printf("%s\n", list->str);
+// 		}
+// 		list = list->next;
+// 	}
+// 	data = NULL;
+// }
