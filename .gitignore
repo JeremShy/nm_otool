@@ -5,6 +5,7 @@ a.out
 /obj
 ._*
 .DS_Store
-t_malloc
+nm
+otool
 *.so
 *.swp
