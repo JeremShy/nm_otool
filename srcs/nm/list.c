@@ -1,19 +1,19 @@
 #include <nm.h>
 
-void		add_elem_start(t_data *data, t_symbole **list, uint64_t offset)
+void		add_elem_start(t_data *data, t_symbole **list, uint64_t offset, size_t poids)
 {
 	t_symbole	*elem;
 
-	elem = create_elem(data, offset);
+	elem = create_elem(data, offset, poids);
 	*list = elem;
 }
 
-t_symbole		*add_elem_end(t_data *data, t_symbole *list, uint64_t offset)
+t_symbole		*add_elem_end(t_data *data, t_symbole *list, uint64_t offset, size_t poids)
 {
 	t_symbole *elem;
 	t_symbole	*fl;
 
-	if (!(elem = create_elem(data, offset)))
+	if (!(elem = create_elem(data, offset, poids)))
 		return (NULL);
 	if (!list)
 		return (elem);

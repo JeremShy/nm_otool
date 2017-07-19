@@ -3,7 +3,9 @@
 
 long long	ft_rights(t_symbole *elem1, t_symbole *elem2)
 {
- if (!elem1->str && !elem2->str)
+	if (elem1->poids != elem2->poids)
+		return (elem1->poids - elem2->poids);
+	if (!elem1->str && !elem2->str)
 		return (ft_strcmp("", ""));
 	else if (!elem1->str)
 		return (ft_strcmp("", elem2->str));

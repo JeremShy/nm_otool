@@ -79,7 +79,7 @@ t_symbole	*init_symbole_for_32(t_data *data, uint64_t offset, t_symbole *ret)
 }
 
 
-t_symbole	*create_elem(t_data *data, uint64_t offset)
+t_symbole	*create_elem(t_data *data, uint64_t offset, size_t poids)
 {
 	t_symbole	*ret;
 
@@ -88,6 +88,7 @@ t_symbole	*create_elem(t_data *data, uint64_t offset)
 	ret->addr = data->binary + offset;
 	ret->offset = offset;
 	ret->magic = data->magic;
+	ret->poids = poids;
 	if (data->magic == MH_MAGIC_64)
 		ret = init_symbole_for_64(data, offset, ret);
 	else if (data->magic == MH_MAGIC)

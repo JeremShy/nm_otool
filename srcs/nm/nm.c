@@ -13,9 +13,9 @@ void	do_nm(const char *file)
 	}
 	data.magic = *(uint32_t*)(data.binary);
 	if (data.magic == MH_MAGIC_64)
-		handle_64(&data, 0);
+		handle_64(&data, 0, 0);
 	else if (data.magic == MH_MAGIC)
-		handle_32(&data, 0);
+		handle_32(&data, 0, 0);
 	else if (data.magic == FAT_CIGAM)
 		handle_fat_cigam(&data);
 	print_list(&data, data.list);
