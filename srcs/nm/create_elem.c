@@ -17,7 +17,7 @@ char	get_char_for_symtype_64(struct nlist_64 elem, t_data data, t_symbole *ret)
 			return ('U');
 	else if ((elem.n_type & N_TYPE) == N_SECT)
 		return (data.sections[elem.n_sect - 1]);
-	return ('X');
+	return ('S');
 }
 
 char	get_char_for_symtype_32(struct nlist elem, t_data data, t_symbole *ret)
@@ -37,7 +37,7 @@ char	get_char_for_symtype_32(struct nlist elem, t_data data, t_symbole *ret)
 		return ('U');
 	else if ((elem.n_type & N_TYPE) == N_SECT)
 		return (data.sections[elem.n_sect - 1]);
-	return ('X');
+	return ('S');
 }
 
 t_symbole	*init_symbole_for_64(t_data *data, uint64_t offset, t_symbole *ret)

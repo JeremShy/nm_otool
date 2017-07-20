@@ -53,5 +53,5 @@ t_symbole		*add_elem_end(t_data *data, t_symbole *list, uint64_t offset, size_t 
 void				print_list(t_data *data, t_symbole *list);
 t_symbole		*ft_sort(t_symbole *list);
 void				handle_fat_cigam(t_data *data);
-void				handle_static_lib(t_data *data);
+void				handle_static_lib(t_data *data, uint32_t offset);
 #endif

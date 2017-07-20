@@ -20,7 +20,7 @@ void	do_nm(const char *file)
 	else if (data.magic == FAT_CIGAM)
 		handle_fat_cigam(&data);
 	else if (ft_strnequ((char*)data.binary, ARMAG, SARMAG))
-		handle_static_lib(&data);
+		handle_static_lib(&data, 0);
 	print_list(&data, data.list);
 }
 

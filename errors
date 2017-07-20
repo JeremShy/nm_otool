@@ -1,3 +1,4 @@
-ERROR while processing /usr/bin/audiodevice
-ERROR while processing /usr/bin/python3-32
-ERROR while processing /usr/bin/python3.4-32
+ERROR while processing /usr/lib/libATCommandStudio.a
+ERROR while processing /usr/lib/libkmodc++.a
+ERROR while processing /usr/lib/libobjc.A.dylib
+ERROR while processing /usr/lib/libobjc.dylib

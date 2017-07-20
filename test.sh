@@ -3,6 +3,8 @@
 FILES=$1/*
 echo "Files : $FILES"
 
+rm errors
+
 for f in $FILES
 do
 	echo "Processing file $f"
