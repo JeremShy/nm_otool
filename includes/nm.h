@@ -1,10 +1,18 @@
 #ifndef NM_H
 # define NM_H
 
+#ifdef __x86_64__
+	# define CPUTYPE CPU_TYPE_X86_64
+#endif
+#ifdef __i386__
+	# define CPUTYPE CPU_TYPE_I386
+#endif
+
 # include <stdio.h>
 # include <ft_printf.h>
 # include <libbinary.h>
 # include <libft.h>
+# include <ar.h>
 
 typedef struct	s_symbole
 {
@@ -30,6 +38,7 @@ typedef struct	s_data
 	uint32_t	symoff;
 	uint32_t	nsyms;
 	char			*sections;
+	const char			*av;
 }				t_data;
 
 void				find_boundaries_64(t_data *data, uint64_t offset);
@@ -44,5 +53,5 @@ t_symbole		*add_elem_end(t_data *data, t_symbole *list, uint64_t offset, size_t 
 void				print_list(t_data *data, t_symbole *list);
 t_symbole		*ft_sort(t_symbole *list);
 void				handle_fat_cigam(t_data *data);
-
+void				handle_static_lib(t_data *data);
 #endif

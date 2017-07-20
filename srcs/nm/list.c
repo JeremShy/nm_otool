@@ -45,7 +45,10 @@ void	print_list(t_data *data, t_symbole *list)
 					ft_printf("%8c ", ' ');
 			}
 			ft_printf("%c ", list->sym);
-	 		ft_printf("%s\n", list->str);
+			if (list->str)
+	 			ft_printf("%s\n", list->str);
+			else
+				ft_printf("\n");
 		}
 		list = list->next;
 	}

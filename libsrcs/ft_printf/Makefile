@@ -6,7 +6,7 @@
 #    By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/08 11:49:18 by jcamhi            #+#    #+#              #
-#    Updated: 2017/05/18 15:34:26 by jcamhi           ###   ########.fr        #
+#    Updated: 2017/07/20 18:07:29 by jcamhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 
 $(NAME) : $(OBJ)
 	ar r $(NAME) $(OBJ)
-	ranlib $(NAME)
+#	ranlib $(NAME)
 
 clean:
 	/bin/rm -f $(OBJ)

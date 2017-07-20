@@ -14,7 +14,7 @@ char	get_char_for_symtype_64(struct nlist_64 elem, t_data data, t_symbole *ret)
 	else if ((elem.n_type & N_TYPE) == N_INDR)
 		return ('I');
 	else if ((elem.n_type & N_TYPE) == N_PBUD)
-		return ('U');
+			return ('U');
 	else if ((elem.n_type & N_TYPE) == N_SECT)
 		return (data.sections[elem.n_sect - 1]);
 	return ('X');

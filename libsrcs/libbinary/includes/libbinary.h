@@ -11,6 +11,7 @@
 # include <mach-o/nlist.h>
 # include <mach-o/stab.h>
 # include <mach-o/fat.h>
+# include <mach-o/ranlib.h>
 
 char	*map_binary(const char *file);
 

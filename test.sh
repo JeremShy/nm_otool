@@ -20,6 +20,9 @@ do
 		echo "ERROR while processing $f"
 		echo "diff:"
 		echo "$DIFF"
-		exit
+#		exit
+		echo "ERROR while processing $f"
+		echo "ERROR while processing $f" >> errors
+		sleep 2;
 	fi
 done

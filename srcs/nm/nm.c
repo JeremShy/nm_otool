@@ -6,9 +6,10 @@ void	do_nm(const char *file)
 
 	data.binary = map_binary(file);
 	data.list = NULL;
+	data.av = file;
 	if (!data.binary)
 	{
-		ft_printf("Error !!!\n");
+		ft_putstr_fd("Error !!!\n", 2);
 		return ;
 	}
 	data.magic = *(uint32_t*)(data.binary);
@@ -18,6 +19,8 @@ void	do_nm(const char *file)
 		handle_32(&data, 0, 0);
 	else if (data.magic == FAT_CIGAM)
 		handle_fat_cigam(&data);
+	else if (ft_strnequ((char*)data.binary, ARMAG, SARMAG))
+		handle_static_lib(&data);
 	print_list(&data, data.list);
 }
 
@@ -32,6 +35,8 @@ int		main(int ac, char **av)
 		i = 1;
 		while(i < ac)
 		{
+			if (ac > 2)
+				ft_printf("\n%s:\n", av[i]);
 			do_nm(av[i]);
 			i++;
 		}

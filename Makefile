@@ -6,7 +6,7 @@
 #    By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/06 15:15:02 by jcamhi            #+#    #+#              #
-#    Updated: 2017/07/19 20:30:44 by jcamhi           ###   ########.fr        #
+#    Updated: 2017/07/20 17:50:16 by jcamhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ SRC_NAME_NM = nm.c \
 								find_boundaries_32.c \
 								fat.c \
 								handle.c \
-								create_list.c
+								create_list.c \
+								static_lib.c
 
 SRC_NAME_OT = otool.c
 
