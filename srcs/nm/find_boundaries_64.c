@@ -13,6 +13,7 @@ static int	handle_seg_header_64(t_data *data, struct load_command *lc, uint32_t 
 		return (i);
 	while (j < sc->nsects)
 	{
+		data->nbsect++;
 		if (ft_strequ(tab[j].sectname, "__text"))
 			data->sections[j + i] = 'T';
 		else if (ft_strequ(tab[j].sectname, "__bss"))
@@ -38,9 +39,10 @@ void	find_boundaries_64(t_data *data, uint64_t offset)
 	lc = (void*)header + sizeof(struct mach_header_64);
 	i = 0;
 	j = 0;
-	if (!(data->sections = (char*)malloc(header->ncmds + 1)))
+	data->nbsect = 0;
+	if (!(data->sections = (char*)malloc(header->ncmds * 20 + 1)))
 		return ;
-	data->sections = ft_memset(data->sections, 'S', header->ncmds);
+	data->sections = ft_memset(data->sections, 'S', header->ncmds * 20);
 	data->sections[header->ncmds] = '\0';
 	while (i < header->ncmds)
 	{

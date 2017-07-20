@@ -38,6 +38,8 @@ typedef struct	s_data
 	uint32_t	symoff;
 	uint32_t	nsyms;
 	char			*sections;
+	uint32_t	nbsect;
+	uint32_t	end;
 	const char			*av;
 }				t_data;
 
