@@ -1,11 +1,11 @@
 #include <nm.h>
 
-void	*convert_chunk(void	*binary, size_t size)
+void	*convert_chunk(void *binary, size_t size)
 {
 	char		*ret;
 	char		*bc;
 	char		*tmp;
-	size_t	i;
+	size_t		i;
 
 	ret = (char*)malloc(size);
 	bc = (char*)binary;
@@ -51,18 +51,19 @@ void	handle_fat_arch(t_data *data, struct fat_arch *arch, size_t poids)
 
 void	handle_fat_cigam(t_data *data)
 {
-	void	*data_cigam;
+	void				*data_cigam;
 	struct fat_header	*header;
 	struct fat_arch		*arch;
-	size_t	i;
-	size_t	nbr;
+	size_t				i;
+	size_t				nbr;
 
 	data_cigam = convert_chunk(data->binary, sizeof(struct fat_header));
 	header = (struct fat_header*)data_cigam;
 	i = 0;
 	nbr = header->nfat_arch;
 	free(data_cigam);
-	data_cigam = convert_chunk(data->binary + sizeof(struct fat_header), nbr * sizeof(struct fat_arch));
+	data_cigam = convert_chunk(data->binary + sizeof(struct fat_header),
+			nbr * sizeof(struct fat_arch));
 	while (i < nbr)
 	{
 		arch = (struct fat_arch*)data_cigam + i;
@@ -74,12 +75,4 @@ void	handle_fat_cigam(t_data *data)
 		}
 		i++;
 	}
-	// i = 0;
-	// while (i < nbr)
-	// {
-	// 	arch = (struct fat_arch*)data_cigam + i;
-	// 	handle_fat_arch(data, arch, i);
-	// 	i++;
-	// }
-	// free(data_cigam);
 }
