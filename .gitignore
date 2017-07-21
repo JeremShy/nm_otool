@@ -5,7 +5,5 @@ a.out
 /obj
 ._*
 .DS_Store
-nm
-otool
 *.so
 *.swp
