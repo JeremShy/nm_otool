@@ -35,10 +35,10 @@ static int	norme_sort(t_symbole **prev, t_symbole **debut, t_symbole **list)
 	return (0);
 }
 
-t_symbole		*ft_sort(t_symbole *list)
+t_symbole	*ft_sort(t_symbole *list)
 {
-	t_symbole		*debut;
-	t_symbole		*prev;
+	t_symbole	*debut;
+	t_symbole	*prev;
 	int			range;
 
 	range = 0;

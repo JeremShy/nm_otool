@@ -38,7 +38,7 @@ int		main(int ac, char **av)
 	else
 	{
 		i = 1;
-		while(i < ac)
+		while (i < ac)
 		{
 			if (ac > 2)
 				ft_printf("\n%s:\n", av[i]);
