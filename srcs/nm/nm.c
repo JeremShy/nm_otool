@@ -6,6 +6,7 @@ void	do_nm(const char *file)
 
 	data.binary = map_binary(file);
 	data.list = NULL;
+	data.sections = NULL;
 	data.av = file;
 	if (!data.binary)
 	{
@@ -22,6 +23,10 @@ void	do_nm(const char *file)
 	else if (ft_strnequ((char*)data.binary, ARMAG, SARMAG))
 		handle_static_lib(&data, 0);
 	print_list(&data, data.list);
+	delete_list(data.list);
+	if (data.sections)
+		free(data.sections);
+	unmap_binary(file, data.binary);
 }
 
 int		main(int ac, char **av)

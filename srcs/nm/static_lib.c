@@ -13,6 +13,7 @@ static void	handle_obj_sl(t_data *data, uint32_t offset, uint32_t max)
 		ft_printf("\n%s(%s):\n", data->av, hdr + 1);
 		obj = (void*)(hdr + 1);
 		data->magic = *(uint32_t*)(obj);
+		data->sections = NULL;
 		while (data->magic != MH_MAGIC_64 && data->magic != MH_MAGIC)
 		{
 			obj = (void*)obj + 1;
@@ -26,7 +27,11 @@ static void	handle_obj_sl(t_data *data, uint32_t offset, uint32_t max)
 			handle_32(data, obj - data->binary, 0);
 		offset += ft_atoi(hdr->ar_size) + sizeof(struct ar_hdr);
 		print_list(data, data->list);
+		delete_list(data->list);
 		data->list = NULL;
+		if (data->sections)
+			free(data->sections);
+		data->sections = NULL;
 		hdr = data->binary + offset;
 	}
 }

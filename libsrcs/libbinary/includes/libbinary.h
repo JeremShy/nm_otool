@@ -14,5 +14,6 @@
 # include <mach-o/ranlib.h>
 
 char	*map_binary(const char *file);
+int	unmap_binary(const char *file, void *addr);
 
 #endif

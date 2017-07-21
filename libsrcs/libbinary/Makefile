@@ -6,13 +6,14 @@
 #    By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 18:15:40 by jcamhi            #+#    #+#              #
-#    Updated: 2017/07/17 18:39:58 by jcamhi           ###   ########.fr        #
+#    Updated: 2017/07/21 16:17:16 by jcamhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_PATH = ./
 
-SRC_NAME = map_binary.c
+SRC_NAME = map_binary.c \
+						unmap_binary.c
 
 OBJ_PATH = ./obj/
 

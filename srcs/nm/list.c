@@ -24,6 +24,19 @@ t_symbole		*add_elem_end(t_data *data, t_symbole *list, uint64_t offset, size_t 
 	return (fl);
 }
 
+void	delete_list(t_symbole *list)
+{
+	t_symbole	*prev;
+	while (list)
+	{
+		if (list->str)
+			free(list->str);
+		prev = list;
+		list = list->next;
+		free(prev);
+	}
+}
+
 void	print_list(t_data *data, t_symbole *list)
 {
 	while(list)
