@@ -1,10 +1,11 @@
 #include <nm.h>
 
-static int	handle_seg_header_32(t_data *data, struct load_command *lc, uint32_t i)
+static int	handle_seg_header_32(t_data *data, struct load_command *lc,
+		uint32_t i)
 {
 	struct segment_command	*sc;
-	struct section				*tab;
-	uint32_t	j;
+	struct section			*tab;
+	uint32_t				j;
 
 	j = 0;
 	sc = (struct segment_command*)lc;
@@ -27,13 +28,12 @@ static int	handle_seg_header_32(t_data *data, struct load_command *lc, uint32_t 
 	return (i + j);
 }
 
-void	find_boundaries_32(t_data *data, uint64_t offset)
+void		find_boundaries_32(t_data *data, uint64_t offset)
 {
 	struct mach_header			*header;
-	struct load_command				*lc;
-	uint32_t									i;
-	uint32_t									j;
-	// char											*ch;
+	struct load_command			*lc;
+	uint32_t					i;
+	uint32_t					j;
 
 	header = (struct mach_header*)(data->binary + offset);
 	lc = (void*)(header) + sizeof(*header);
