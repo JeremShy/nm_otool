@@ -1,6 +1,7 @@
 #include <nm.h>
 
-void		add_elem_start(t_data *data, t_symbole **list, uint64_t offset, size_t poids)
+void			add_elem_start(t_data *data, t_symbole **list, uint64_t offset,
+	size_t poids)
 {
 	t_symbole	*elem;
 
@@ -8,9 +9,10 @@ void		add_elem_start(t_data *data, t_symbole **list, uint64_t offset, size_t poi
 	*list = elem;
 }
 
-t_symbole		*add_elem_end(t_data *data, t_symbole *list, uint64_t offset, size_t poids)
+t_symbole		*add_elem_end(t_data *data, t_symbole *list, uint64_t offset,
+	size_t poids)
 {
-	t_symbole *elem;
+	t_symbole	*elem;
 	t_symbole	*fl;
 
 	if (!(elem = create_elem(data, offset, poids)))
@@ -24,9 +26,10 @@ t_symbole		*add_elem_end(t_data *data, t_symbole *list, uint64_t offset, size_t 
 	return (fl);
 }
 
-void	delete_list(t_symbole *list)
+void			delete_list(t_symbole *list)
 {
 	t_symbole	*prev;
+
 	while (list)
 	{
 		if (list->str)
@@ -37,29 +40,32 @@ void	delete_list(t_symbole *list)
 	}
 }
 
-void	print_list(t_data *data, t_symbole *list)
+static void		print_u(t_symbole *list)
 {
-	while(list)
+	if (list->magic == MH_MAGIC_64)
+		ft_printf("%016llx ", list->value);
+	else if (list->magic == MH_MAGIC)
+		ft_printf("%08llx ", list->value);
+}
+
+void			print_list(t_data *data, t_symbole *list)
+{
+	while (list)
 	{
 		if (!list->is_debug)
 		{
 			if (list->sym != 'U' && list->sym != 'u')
-			{
-				if (list->magic == MH_MAGIC_64)
-					ft_printf("%016llx ", list->value);
-				else if (list->magic == MH_MAGIC)
-					ft_printf("%08llx ", list->value);
-			}
+				print_u(list);
 			else
 			{
 				if (list->magic == MH_MAGIC_64)
-				ft_printf("%16c ", ' ');
+					ft_printf("%16c ", ' ');
 				else if (list->magic == MH_MAGIC)
 					ft_printf("%8c ", ' ');
 			}
 			ft_printf("%c ", list->sym);
 			if (list->str)
-	 			ft_printf("%s\n", list->str);
+				ft_printf("%s\n", list->str);
 			else
 				ft_printf("\n");
 		}
@@ -67,21 +73,3 @@ void	print_list(t_data *data, t_symbole *list)
 	}
 	data = NULL;
 }
-
-// void	print_list_32(t_data *data, t_symbole *list)
-// {
-// 	while(list)
-// 	{
-// 		if (!list->is_debug)
-// 		{
-// 			if (list->sym != 'U' && list->sym != 'u')
-// 				ft_printf("%08llx ", list->value);
-// 			else
-// 				ft_printf("%8c ", ' ');
-// 			ft_printf("%c ", list->sym);
-// 	 		ft_printf("%s\n", list->str);
-// 		}
-// 		list = list->next;
-// 	}
-// 	data = NULL;
-// }
