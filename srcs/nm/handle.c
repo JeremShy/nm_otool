@@ -2,10 +2,10 @@
 
 void	handle_64(t_data *data, uint64_t offset, size_t poids)
 {
-	struct mach_header_64 *header;
-	struct load_command	*lc;
+	struct mach_header_64	*header;
+	struct load_command		*lc;
 	struct symtab_command	*sc;
-	uint32_t			i;
+	uint32_t				i;
 
 	header = (struct mach_header_64*)(data->binary + offset);
 	lc = (void*)(data->binary + offset) + sizeof(*header);
@@ -30,10 +30,10 @@ void	handle_64(t_data *data, uint64_t offset, size_t poids)
 
 void	handle_32(t_data *data, uint64_t offset, size_t poids)
 {
-	struct mach_header *header;
-	struct load_command	*lc;
+	struct mach_header		*header;
+	struct load_command		*lc;
 	struct symtab_command	*sc;
-	uint32_t			i;
+	uint32_t				i;
 
 	header = (struct mach_header*)(data->binary + offset);
 	lc = (void*)(data->binary + offset) + sizeof(*header);
