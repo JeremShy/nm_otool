@@ -6,7 +6,7 @@
 #    By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/06 15:15:02 by jcamhi            #+#    #+#              #
-#    Updated: 2017/07/22 15:15:05 by JeremShy         ###   ########.fr        #
+#    Updated: 2017/07/22 16:07:00 by JeremShy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRC_NAME_NM = nm.c \
 
 SRC_NAME_OT = otool.c \
 								handle.c \
-								print.c
+								print.c \
+								fat.c
 
 OBJ_PATH_NM = ./objnm/
 OBJ_PATH_OT = ./objot/

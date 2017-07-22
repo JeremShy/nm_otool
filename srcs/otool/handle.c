@@ -1,6 +1,6 @@
 #include <otool.h>
 
-void	handle_lc_seg_64(t_data *data, uint64_t offset)
+void	handle_lc_seg_64(t_data *data, uint64_t offset, uint64_t tot_offset)
 {
 	struct segment_command_64	*seg;
 	struct section_64					*sect;
@@ -15,7 +15,7 @@ void	handle_lc_seg_64(t_data *data, uint64_t offset)
 		{
 			if (ft_strequ(sect->sectname, "__text"))
 			{
-				print(data, data->binary + sect->offset, sect->size, sect->addr);
+				print(data, data->binary + sect->offset + tot_offset, sect->size, sect->addr);
 			}
 			sect++;
 			i++;
@@ -35,13 +35,13 @@ void	handle_64(t_data *data, uint64_t offset)
 	while (i < header->ncmds)
 	{
 		if (lc->cmd == LC_SEGMENT_64)
-			handle_lc_seg_64(data, (void*)lc - data->binary);
+			handle_lc_seg_64(data, (void*)lc - data->binary, offset);
 		lc = (void*)lc + lc->cmdsize;
 		i++;
 	}
 }
 
-void	handle_lc_seg_32(t_data *data, uint64_t offset)
+void	handle_lc_seg_32(t_data *data, uint64_t offset, uint64_t tot_offset)
 {
 	struct segment_command	*seg;
 	struct section					*sect;
@@ -56,7 +56,7 @@ void	handle_lc_seg_32(t_data *data, uint64_t offset)
 		{
 			if (ft_strequ(sect->sectname, "__text"))
 			{
-				print(data, data->binary + sect->offset, sect->size, sect->addr);
+				print(data, data->binary + sect->offset + tot_offset, sect->size, sect->addr);
 			}
 			sect++;
 			i++;
@@ -76,7 +76,7 @@ void	handle_32(t_data *data, uint64_t offset)
 	while (i < header->ncmds)
 	{
 		if (lc->cmd == LC_SEGMENT)
-			handle_lc_seg_32(data, (void*)lc - data->binary);
+			handle_lc_seg_32(data, (void*)lc - data->binary, offset);
 		lc = (void*)lc + lc->cmdsize;
 		i++;
 	}

@@ -1,17 +1,2 @@
 in /bin
 
-in .
-ERROR while processing ./not_macho.out
-
-in /usr/lib
-
-in /usr/libexec
-
-in /usr/libexec/apache2
-
-in /sbin
-
-in /usr/sbin
-
-in /usr/bin
-

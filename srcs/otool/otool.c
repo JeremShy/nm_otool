@@ -12,8 +12,10 @@ void	do_otool(const char *file)
 	data.magic = *(uint32_t*)(data.binary);
 	if (data.magic == MH_MAGIC_64)
 		handle_64(&data, 0);
-	if (data.magic == MH_MAGIC)
+	else if (data.magic == MH_MAGIC)
 		handle_32(&data, 0);
+	else if (data.magic == FAT_CIGAM)
+		handle_fat(&data);
 
 }
 
