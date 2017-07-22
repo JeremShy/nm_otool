@@ -34,4 +34,6 @@ void	handle_64(t_data *data, uint64_t offset);
 void	handle_32(t_data *data, uint64_t offset);
 void	print(t_data *data, void *start, uint64_t size, uint64_t print_size);
 void	handle_fat(t_data *data);
+void			handle_static_lib(t_data *data, uint32_t offset);
+
 #endif

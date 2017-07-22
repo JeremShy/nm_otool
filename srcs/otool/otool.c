@@ -7,15 +7,27 @@ void	do_otool(const char *file)
 	data.binary = map_binary(file);
 	if (!data.binary)
 		return ;
-	ft_printf("%s:\n", file);
 	data.av = file;
 	data.magic = *(uint32_t*)(data.binary);
 	if (data.magic == MH_MAGIC_64)
+	{
+		ft_printf("%s:\n", file);
 		handle_64(&data, 0);
+	}
 	else if (data.magic == MH_MAGIC)
+	{
+		ft_printf("%s:\n", file);
 		handle_32(&data, 0);
+	}
 	else if (data.magic == FAT_CIGAM)
+	{
 		handle_fat(&data);
+	}
+	else if (ft_strnequ((char*)data.binary, ARMAG, SARMAG))
+	{
+		ft_printf("Archive : %s\n", file);
+		handle_static_lib(&data, 0);
+	}
 
 }
 

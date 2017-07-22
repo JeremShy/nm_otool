@@ -32,20 +32,28 @@ void	handle_fat_arch(t_data *data, struct fat_arch *arch)
 		if (ft_strnequ((char*)data->binary + arch->offset, ARMAG, SARMAG))
 		{
 			data->end = arch->offset + arch->size;
-			// handle_static_lib(data, arch->offset);
+			ft_printf("Archive : %s\n", data->av);
+			handle_static_lib(data, arch->offset);
 		}
 		else
+		{
+			ft_printf("%s:\n", data->av);
 			handle_32(data, arch->offset);
+		}
 	}
 	else if (arch->cputype == CPU_TYPE_X86_64)
 	{
 		if (ft_strnequ((char*)data->binary + arch->offset, ARMAG, SARMAG))
 		{
 			data->end = arch->offset + arch->size;
-			// handle_static_lib(data, arch->offset);
+			ft_printf("Archive : %s\n", data->av);
+			handle_static_lib(data, arch->offset);
 		}
 		else
+		{
+			ft_printf("%s:\n", data->av);
 			handle_64(data, arch->offset);
+		}
 	}
 }
 
