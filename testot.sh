@@ -14,11 +14,6 @@ do
 	do
 		echo "Processing file $f"
 		TYPE=$(file $f)
-	#	if [ "$TYPE" != "$f: Mach-O 64-bit executable x86_64" ] && [ "$TYPE" != "$f: Mach-O 64-bit object x86_64" ]
-	#	then
-			# echo "ERROR - $TYPE"
-	#		continue
-	#	fi
 		/usr/bin/otool -t $f > sysres
 		./otool $f > myres
 		DIFF=$(diff sysres myres)

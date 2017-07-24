@@ -24,7 +24,8 @@ void	*convert_chunk(void *binary, size_t size)
 	return (ret);
 }
 
-void	handle_fat_arch(t_data *data, struct fat_arch *arch, size_t poids)
+void	handle_fat_arch(t_data *data, struct fat_arch *arch, size_t poids,
+	t_opt opt)
 {
 	data->magic = *(uint32_t*)(data->binary + arch->offset);
 	if (arch->cputype == CPU_TYPE_I386)
@@ -32,7 +33,7 @@ void	handle_fat_arch(t_data *data, struct fat_arch *arch, size_t poids)
 		if (ft_strnequ((char*)data->binary + arch->offset, ARMAG, SARMAG))
 		{
 			data->end = arch->offset + arch->size;
-			handle_static_lib(data, arch->offset);
+			handle_static_lib(data, arch->offset, opt);
 		}
 		else
 			handle_32(data, arch->offset, poids);
@@ -42,14 +43,14 @@ void	handle_fat_arch(t_data *data, struct fat_arch *arch, size_t poids)
 		if (ft_strnequ((char*)data->binary + arch->offset, ARMAG, SARMAG))
 		{
 			data->end = arch->offset + arch->size;
-			handle_static_lib(data, arch->offset);
+			handle_static_lib(data, arch->offset, opt);
 		}
 		else
 			handle_64(data, arch->offset, poids);
 	}
 }
 
-void	handle_fat_cigam(t_data *data)
+void	handle_fat_cigam(t_data *data, t_opt opt)
 {
 	void				*data_cigam;
 	struct fat_header	*header;
@@ -69,7 +70,7 @@ void	handle_fat_cigam(t_data *data)
 		arch = (struct fat_arch*)data_cigam + i;
 		if (arch->cputype == CPUTYPE)
 		{
-			handle_fat_arch(data, arch, i);
+			handle_fat_arch(data, arch, i, opt);
 			free(data_cigam);
 			return ;
 		}

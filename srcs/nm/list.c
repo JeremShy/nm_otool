@@ -40,7 +40,7 @@ void			delete_list(t_symbole *list)
 	}
 }
 
-static void		print_u(t_symbole *list)
+static void		print_not_u(t_symbole *list)
 {
 	if (list->magic == MH_MAGIC_64)
 		ft_printf("%016llx ", list->value);
@@ -48,22 +48,24 @@ static void		print_u(t_symbole *list)
 		ft_printf("%08llx ", list->value);
 }
 
-void			print_list(t_data *data, t_symbole *list)
+void			print_list(t_data *data, t_symbole *list, t_opt opt)
 {
 	while (list)
 	{
-		if (!list->is_debug)
+		if (!list->is_debug && !(opt.u && ft_toupper(list->sym) != 'U')
+			&& !(opt.um && ft_toupper(list->sym) == 'U'))
 		{
-			if (list->sym != 'U' && list->sym != 'u')
-				print_u(list);
-			else
+			if (!opt.u && ft_toupper(list->sym) != 'U')
+				print_not_u(list);
+			else if (!opt.u)
 			{
 				if (list->magic == MH_MAGIC_64)
 					ft_printf("%16c ", ' ');
 				else if (list->magic == MH_MAGIC)
 					ft_printf("%8c ", ' ');
 			}
-			ft_printf("%c ", list->sym);
+			if (!opt.u)
+				ft_printf("%c ", list->sym);
 			if (list->str)
 				ft_printf("%s\n", list->str);
 			else
