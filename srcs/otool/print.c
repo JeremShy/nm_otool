@@ -3,7 +3,7 @@
 void	print(t_data *data, void *start, uint64_t size, uint64_t print_size)
 {
 	uint64_t	offset;
-	int		i;
+	int			i;
 
 	ft_printf("Contents of (__TEXT,__text) section\n");
 	offset = 0;
