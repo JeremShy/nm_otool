@@ -6,3 +6,10 @@ in /usr/lib
 
 in /usr/bin
 ERROR while processing /usr/bin/audiodevice
+ERROR while processing /usr/bin/python3-32
+ERROR while processing /usr/bin/python3.4-32
+
+in /usr/libexec
+
+in /usr/libexec/apache2
+

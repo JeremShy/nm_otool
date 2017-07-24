@@ -44,7 +44,7 @@ void		handle_fat_arch(t_data *data, struct fat_arch *arch)
 	data->magic = *(uint32_t*)(data->binary + arch->offset);
 	if (arch->cputype == CPU_TYPE_I386)
 	{
-		handle_fat_arch(data, arch);
+		handle_fat_arch_32(data, arch);
 	}
 	else if (arch->cputype == CPU_TYPE_X86_64)
 	{
