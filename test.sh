@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm errors 2>&1 > /dev/null
+rm errorsnm 2>&1 > /dev/null
 
 DIRS=$1
 for d in $DIRS
@@ -8,28 +8,22 @@ do
 	FILES=$d/*
 	echo "Files : $FILES"
 
-	echo "in $d" >> errors
+	echo "in $d" >> errorsnm
 
 	for f in $FILES
 	do
 		echo "Processing file $f"
 		TYPE=$(file $f)
-	#	if [ "$TYPE" != "$f: Mach-O 64-bit executable x86_64" ] && [ "$TYPE" != "$f: Mach-O 64-bit object x86_64" ]
-	#	then
-			# echo "ERROR - $TYPE"
-	#		continue
-	#	fi
-		/usr/bin/nm $f > sysres
-		./nm $f > myres
-		DIFF=$(diff sysres myres)
+		/usr/bin/nm $f > sysresnm
+		./nm $f > myresnm
+		DIFF=$(diff sysresnm myresnm)
 		if [ "$DIFF" != "" ]
 		then
 			echo "ERROR while processing $f"
 			echo "diff:"
 			echo "$DIFF"
-			echo "ERROR while processing $f" >> errors
-			sleep 2;
+			echo "ERROR while processing $f" >> errorsnm
 		fi
 	done
-	echo "" >> errors
+	echo "" >> errorsnm
 done
