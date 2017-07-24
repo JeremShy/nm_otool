@@ -1,5 +1,17 @@
-#ifndef LIB_BINARY_H
-# define LIB_BINARY_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libbinary.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcamhi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/24 15:42:52 by jcamhi            #+#    #+#             */
+/*   Updated: 2017/07/24 15:42:53 by jcamhi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef LIBBINARY_H
+# define LIBBINARY_H
 
 # include <sys/mman.h>
 # include <fcntl.h>
@@ -14,6 +26,6 @@
 # include <mach-o/ranlib.h>
 
 char	*map_binary(const char *file);
-int	unmap_binary(const char *file, void *addr);
+int		unmap_binary(const char *file, void *addr);
 
 #endif
