@@ -5,3 +5,4 @@ in /sbin
 in /usr/lib
 
 in /usr/bin
+ERROR while processing /usr/bin/audiodevice

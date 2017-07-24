@@ -3,16 +3,18 @@
 void	handle_lc_seg_64(t_data *data, uint64_t offset, uint64_t tot_offset)
 {
 	struct segment_command_64	*seg;
-	struct section_64					*sect;
-	uint32_t	i;
+	struct section_64			*sect;
+	uint32_t					i;
 
 	seg = data->binary + offset;
 	sect = (void*)seg + sizeof(struct segment_command_64);
 	i = 0;
 	while (i < seg->nsects)
 	{
-		if (ft_strequ(sect->sectname, "__text") && ft_strequ(sect->segname, "__TEXT"))
-			print(data, data->binary + sect->offset + tot_offset, sect->size, sect->addr);
+		if (ft_strequ(sect->sectname, "__text") && ft_strequ(sect->segname,
+				"__TEXT"))
+			print(data, data->binary + sect->offset + tot_offset, sect->size,
+				sect->addr);
 		sect++;
 		i++;
 	}
@@ -20,10 +22,9 @@ void	handle_lc_seg_64(t_data *data, uint64_t offset, uint64_t tot_offset)
 
 void	handle_64(t_data *data, uint64_t offset)
 {
-	struct load_command	*lc;
+	struct load_command		*lc;
 	struct mach_header_64	*header;
-	uint32_t		i;
-
+	uint32_t				i;
 
 	header = data->binary + offset;
 	lc = data->binary + offset + sizeof(struct mach_header_64);
@@ -40,16 +41,18 @@ void	handle_64(t_data *data, uint64_t offset)
 void	handle_lc_seg_32(t_data *data, uint64_t offset, uint64_t tot_offset)
 {
 	struct segment_command	*seg;
-	struct section					*sect;
-	uint32_t	i;
+	struct section			*sect;
+	uint32_t				i;
 
 	seg = data->binary + offset;
 	sect = (void*)seg + sizeof(struct segment_command);
 	i = 0;
 	while (i < seg->nsects)
 	{
-		if (ft_strequ(sect->sectname, "__text") && ft_strequ(sect->segname, "__TEXT"))
-			print(data, data->binary + sect->offset + tot_offset, sect->size, sect->addr);
+		if (ft_strequ(sect->sectname, "__text") && ft_strequ(sect->segname,
+				"__TEXT"))
+			print(data, data->binary + sect->offset + tot_offset, sect->size,
+				sect->addr);
 		sect++;
 		i++;
 	}
@@ -59,7 +62,7 @@ void	handle_32(t_data *data, uint64_t offset)
 {
 	struct load_command	*lc;
 	struct mach_header	*header;
-	uint32_t		i;
+	uint32_t			i;
 
 	header = data->binary + offset;
 	lc = data->binary + offset + sizeof(struct mach_header);

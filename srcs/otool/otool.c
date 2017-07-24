@@ -1,5 +1,11 @@
 #include <otool.h>
 
+void	do_otool_on_archive(const char *file, t_data *data)
+{
+	ft_printf("Archive : %s\n", file);
+	handle_static_lib(data, 0);
+}
+
 void	do_otool(const char *file)
 {
 	t_data	data;
@@ -24,11 +30,7 @@ void	do_otool(const char *file)
 		handle_fat(&data);
 	}
 	else if (ft_strnequ((char*)data.binary, ARMAG, SARMAG))
-	{
-		ft_printf("Archive : %s\n", file);
-		handle_static_lib(&data, 0);
-	}
-
+		do_otool_on_archive(file, &data);
 }
 
 int		main(int ac, char **av)
