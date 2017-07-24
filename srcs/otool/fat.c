@@ -1,6 +1,6 @@
 #include <otool.h>
 
-void	*convert_chunk(void *binary, size_t size)
+void		*convert_chunk(void *binary, size_t size)
 {
 	char		*ret;
 	char		*bc;
@@ -24,22 +24,27 @@ void	*convert_chunk(void *binary, size_t size)
 	return (ret);
 }
 
-void	handle_fat_arch(t_data *data, struct fat_arch *arch)
+static void	handle_fat_arch_32(t_data *data, struct fat_arch *arch)
+{
+	if (ft_strnequ((char*)data->binary + arch->offset, ARMAG, SARMAG))
+	{
+		data->end = arch->offset + arch->size;
+		ft_printf("Archive : %s\n", data->av);
+		handle_static_lib(data, arch->offset);
+	}
+	else
+	{
+		ft_printf("%s:\n", data->av);
+		handle_32(data, arch->offset);
+	}
+}
+
+void		handle_fat_arch(t_data *data, struct fat_arch *arch)
 {
 	data->magic = *(uint32_t*)(data->binary + arch->offset);
 	if (arch->cputype == CPU_TYPE_I386)
 	{
-		if (ft_strnequ((char*)data->binary + arch->offset, ARMAG, SARMAG))
-		{
-			data->end = arch->offset + arch->size;
-			ft_printf("Archive : %s\n", data->av);
-			handle_static_lib(data, arch->offset);
-		}
-		else
-		{
-			ft_printf("%s:\n", data->av);
-			handle_32(data, arch->offset);
-		}
+		handle_fat_arch(data, arch);
 	}
 	else if (arch->cputype == CPU_TYPE_X86_64)
 	{
@@ -57,8 +62,7 @@ void	handle_fat_arch(t_data *data, struct fat_arch *arch)
 	}
 }
 
-
-void	handle_fat(t_data *data)
+void		handle_fat(t_data *data)
 {
 	void				*data_cigam;
 	struct fat_header	*header;
