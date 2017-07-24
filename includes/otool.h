@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   otool.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcamhi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/24 15:38:12 by jcamhi            #+#    #+#             */
+/*   Updated: 2017/07/24 15:38:35 by jcamhi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef OTOOL_H
 # define OTOOL_H
 
@@ -30,10 +42,11 @@ typedef struct	s_data
 	const char	*av;
 }				t_data;
 
-void	handle_64(t_data *data, uint64_t offset);
-void	handle_32(t_data *data, uint64_t offset);
-void	print(t_data *data, void *start, uint64_t size, uint64_t print_size);
-void	handle_fat(t_data *data);
+void			handle_64(t_data *data, uint64_t offset);
+void			handle_32(t_data *data, uint64_t offset);
+void			print(t_data *data, void *start, uint64_t size,
+		uint64_t print_size);
+void			handle_fat(t_data *data);
 void			handle_static_lib(t_data *data, uint32_t offset);
 
 #endif

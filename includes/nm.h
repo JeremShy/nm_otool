@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   nm.h                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcamhi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/24 15:37:59 by jcamhi            #+#    #+#             */
+/*   Updated: 2017/07/24 15:38:02 by jcamhi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef NM_H
 # define NM_H
 
@@ -48,7 +60,6 @@ typedef struct	s_opt
 	int	u;
 	int	um;
 }				t_opt;
-
 
 void			find_boundaries_64(t_data *data, uint64_t offset);
 void			find_boundaries_32(t_data *data, uint64_t offset);
