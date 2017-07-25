@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:37:59 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 16:13:04 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 18:45:40 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ typedef struct	s_data
 	char		*sections;
 	uint32_t	nbsect;
 	uint32_t	end;
-	off_t	size;
-	void			*tend;
+	off_t		size;
+	void		*tend;
 	const char	*av;
-	int		endiancast;
-	int		error;
+	int			endiancast;
+	int			error;
 }				t_data;
 
 typedef struct	s_opt
@@ -84,16 +84,21 @@ void			handle_fat_cigam(t_data *data, t_opt opt);
 void			handle_static_lib(t_data *data, uint32_t offset, t_opt opt);
 int				ft_parsing(int ac, char **av, t_opt *opt);
 int				find_start(int ac, char **av);
-int64_t	get_good_endian(t_data data, int64_t nbr);
-int	get_good_endianu(t_data data, uint64_t nbr);
-int	fat_handle_32(t_data *data, struct fat_arch *arch, size_t poids, t_opt opt);
-int	fat_handle_64(t_data *data, struct fat_arch *arch, size_t poids, t_opt opt);
-int	fat_handle_ppc(t_data *data, struct fat_arch *arch, size_t poids, t_opt opt);
-int	handle_fat_arch(t_data *data, struct fat_arch *arch, size_t poids, t_opt opt);
-void	set_error_and_return(t_data *data);
-int		handle_obj_sl(t_data *data, uint32_t offset, uint32_t max, t_opt opt);
-int64_t		get_good_endian(t_data data, int64_t nbr);
-int			get_good_endianu(t_data data, uint64_t nbr);
-void		set_error_and_return(t_data *data);
+int64_t			get_good_endian(t_data data, int64_t nbr);
+int				get_good_endianu(t_data data, uint64_t nbr);
+int				fat_handle_32(t_data *data, struct fat_arch *arch, size_t poids,
+	t_opt opt);
+int				fat_handle_64(t_data *data, struct fat_arch *arch, size_t poids,
+	t_opt opt);
+int				fat_handle_ppc(t_data *data, struct fat_arch *arch,
+	size_t poids, t_opt opt);
+int				handle_fat_arch(t_data *data, struct fat_arch *arch,
+	size_t poids, t_opt opt);
+void			set_error_and_return(t_data *data);
+int				handle_obj_sl(t_data *data, uint32_t offset, uint32_t max,
+	t_opt opt);
+int64_t			get_good_endian(t_data data, int64_t nbr);
+int				get_good_endianu(t_data data, uint64_t nbr);
+void			set_error_and_return(t_data *data);
 
 #endif

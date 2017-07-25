@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   endian.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcamhi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/25 18:46:49 by jcamhi            #+#    #+#             */
+/*   Updated: 2017/07/25 18:48:18 by jcamhi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <libbinary.h>
 #include <stdlib.h>
 
-void	*convert_chunk_alloc(void *binary, size_t size)
+void		*convert_chunk_alloc(void *binary, size_t size)
 {
 	char		*ret;
 	char		*bc;
@@ -25,10 +37,10 @@ void	*convert_chunk_alloc(void *binary, size_t size)
 	return (ret);
 }
 
-int64_t	convert_chunk(void *binary)
+int64_t		convert_chunk(void *binary)
 {
 	char		*ret;
-	int64_t	tm;
+	int64_t		tm;
 	char		*bc;
 	char		*tmp;
 	size_t		i;
