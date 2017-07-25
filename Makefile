@@ -6,7 +6,7 @@
 #    By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/06 15:15:02 by jcamhi            #+#    #+#              #
-#    Updated: 2017/07/24 14:39:41 by jcamhi           ###   ########.fr        #
+#    Updated: 2017/07/24 21:17:49 by jcamhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRC_NAME_NM = nm.c \
 								handle.c \
 								create_list.c \
 								static_lib.c \
-								opt.c
+								opt.c \
+								utils.c
 
 SRC_NAME_OT = otool.c \
 								handle.c \
@@ -36,8 +37,8 @@ INC_PATH = ./includes ./libsrcs/libbinary/includes
 SRC_PATH_NM = ./srcs/nm/
 SRC_PATH_OT = ./srcs/otool/
 
-NAME_NM = nm
-NAME_OT = otool
+NAME_NM = ft_nm
+NAME_OT = ft_otool
 
 
 CC = gcc
@@ -61,13 +62,13 @@ OBJ_NAME_OT = $(SRC_NAME_OT:.c=.o)
 INC = $(addprefix -I,$(INC_PATH))
 
 
-all : $(NAME_NM) $(NAME_OT) $(SYM_NAME)
+all : $(NAME_NM) $(SYM_NAME)
 
 $(NAME_NM) : $(OBJ_NM)
 	@mkdir -p $(LIB_DIR)
-	@make -C libsrcs/libft 2> /dev/null
-	@make -C libsrcs/ft_printf 2> /dev/null
-	@make -C libsrcs/libbinary 2> /dev/null
+	@make -C libsrcs/libft
+	@make -C libsrcs/ft_printf
+	@make -C libsrcs/libbinary
 	$(CC) $(CFLAGS) $^ -L $(LIB_DIR) $(LFLAGS) -o $@
 
 $(NAME_OT) : $(OBJ_OT)
@@ -103,11 +104,5 @@ fclean: clean
 	@rmdir lib 2> /dev/null || true
 
 re: fclean all
-
-leaks: all
-	 valgrind --leak-check=full ./$(NAME_TEST)
-
-leaks-le-pen: all
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME_TEST)
 
 .PHONY : all clean fclean re

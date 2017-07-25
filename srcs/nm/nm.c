@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nm.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcamhi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:36:01 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/24 15:36:02 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 00:35:18 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,17 @@ void	do_nm(const char *file, t_opt opt)
 {
 	t_data			data;
 
-	data.binary = map_binary(file);
+	data.binary = map_binary(file, &(data.size));
 	if (!data.binary)
 	{
 		ft_putstr_fd("Error !!!\n", 2);
 		return ;
 	}
+	data.error = 0;
 	data.list = NULL;
 	data.sections = NULL;
 	data.av = file;
+	data.endiancast = 0;
 	data.magic = *(uint32_t*)(data.binary);
 	if (data.magic == MH_MAGIC_64)
 		handle_64(&data, 0, 0);
@@ -34,11 +36,19 @@ void	do_nm(const char *file, t_opt opt)
 		handle_fat_cigam(&data, opt);
 	else if (ft_strnequ((char*)data.binary, ARMAG, SARMAG))
 		handle_static_lib(&data, 0, opt);
-	print_list(&data, data.list, opt);
-	delete_list(data.list);
+	if (data.error)
+	{
+		ft_putstr_fd("Error !!!\n", 2);
+		return ;
+	}
+	if (data.list)
+	{
+		print_list(&data, data.list, opt);
+		delete_list(data.list);
+	}
 	if (data.sections)
 		free(data.sections);
-	unmap_binary(file, data.binary);
+	unmap_binary(data.binary, data.size);
 }
 
 int		main(int ac, char **av)
@@ -47,7 +57,8 @@ int		main(int ac, char **av)
 	t_opt	opt;
 
 	ft_bzero((void*)(&opt), sizeof(t_opt));
-	opt = ft_parsing(ac, av);
+	if (!ft_parsing(ac, av, &opt))
+		return (1);
 	i = find_start(ac, av);
 	if (ac == i)
 		do_nm("a.out", opt);

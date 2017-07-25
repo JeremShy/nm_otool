@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   opt.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcamhi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:36:02 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/24 15:36:03 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/24 22:29:58 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int				find_start(int ac, char **av)
 	return (i);
 }
 
-void			check_validity(char *av)
+int			check_validity(char *av)
 {
 	int	i;
 
@@ -52,10 +52,11 @@ void			check_validity(char *av)
 		{
 			ft_printf("nm: illegal option -- %c\n", av[i]);
 			ft_printf("usage: nm [-uU] [file ...]\n");
-			exit(EXIT_FAILURE);
+			return (0);
 		}
 		i++;
 	}
+	return (1);
 }
 
 void			norme_parsing(int i, char **av, t_opt *options)
@@ -66,24 +67,24 @@ void			norme_parsing(int i, char **av, t_opt *options)
 		options->um = 1;
 }
 
-t_opt			ft_parsing(int ac, char **av)
+int			ft_parsing(int ac, char **av, t_opt *opt)
 {
-	t_opt	options;
 	int		i;
 	int		cont;
 
-	options = ft_init(&i);
+	*opt = ft_init(&i);
 	cont = 1;
 	while (i < ac && cont && !ft_strequ(av[i], "--"))
 	{
 		if (av[i][0] == '-')
 		{
-			check_validity(av[i]);
-			norme_parsing(i, av, &options);
+			if (!check_validity(av[i]))
+				return (0);
+			norme_parsing(i, av, opt);
 			i++;
 		}
 		else
 			cont = 0;
 	}
-	return (options);
+	return (1);
 }

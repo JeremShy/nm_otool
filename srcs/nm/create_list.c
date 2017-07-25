@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcamhi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:35:51 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/24 15:35:52 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/24 23:50:52 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	create_list_64(t_data *data, size_t poids)
 {
-	struct nlist_64	*array;
 	uint32_t		i;
 
-	array = (struct nlist_64*)((void*)(data->binary) + data->symoff);
 	i = 0;
 	data->list = NULL;
 	while (i < data->nsyms)
 	{
+		if ((void*)(data->symoff + i * sizeof(struct nlist_64)) > data->binary + data->size)
+			return ;
 		data->list = add_elem_end(data, data->list, (uint64_t)(data->symoff +
 					i * sizeof(struct nlist_64)), poids);
 		i++;
@@ -31,14 +31,14 @@ void	create_list_64(t_data *data, size_t poids)
 
 void	create_list_32(t_data *data, size_t poids)
 {
-	struct nlist	*array;
 	uint32_t		i;
 
-	array = (struct nlist*)((void*)(data->binary) + data->symoff);
 	i = 0;
 	data->list = NULL;
 	while (i < data->nsyms)
 	{
+		if ((void*)(data->symoff + i * sizeof(struct nlist)) > data->binary + data->size)
+			return ;
 		data->list = add_elem_end(data, data->list, (uint64_t)(data->symoff +
 					i * sizeof(struct nlist)), poids);
 		i++;

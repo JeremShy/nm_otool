@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   otool.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcamhi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:36:45 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/24 15:36:45 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/24 20:52:18 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	do_otool(const char *file)
 {
 	t_data	data;
 
-	data.binary = map_binary(file);
+	data.binary = map_binary(file, &(data.size));
 	if (!data.binary)
 		return ;
 	data.av = file;
@@ -43,6 +43,7 @@ void	do_otool(const char *file)
 	}
 	else if (ft_strnequ((char*)data.binary, ARMAG, SARMAG))
 		do_otool_on_archive(file, &data);
+	unmap_binary(data.binary, data.size);
 }
 
 int		main(int ac, char **av)

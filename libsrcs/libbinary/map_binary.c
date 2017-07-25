@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_binary.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcamhi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:41:45 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/24 15:42:22 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/24 18:13:09 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libbinary.h>
 
-char	*map_binary(const char *file)
+char	*map_binary(const char *file, off_t *size)
 {
 	char		*ret;
 	int			fd;
@@ -25,6 +25,7 @@ char	*map_binary(const char *file)
 		close(fd);
 		return (NULL);
 	}
+	*size = buf.st_size;
 	if ((ret = mmap(0, buf.st_size, PROT_READ, MAP_PRIVATE, fd, 0))
 			== MAP_FAILED)
 	{

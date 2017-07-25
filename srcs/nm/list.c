@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcamhi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:35:59 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/24 15:36:00 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/24 21:48:36 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void			delete_list(t_symbole *list)
 
 static void		print_not_u(t_symbole *list)
 {
-	if (list->magic == MH_MAGIC_64)
+	if (list->magic == MH_MAGIC_64 || list->magic == MH_MAGIC_64)
 		ft_printf("%016llx ", list->value);
-	else if (list->magic == MH_MAGIC)
+	else if (list->magic == MH_MAGIC || list->magic == MH_CIGAM)
 		ft_printf("%08llx ", list->value);
 }
 
@@ -71,9 +71,9 @@ void			print_list(t_data *data, t_symbole *list, t_opt opt)
 				print_not_u(list);
 			else if (!opt.u)
 			{
-				if (list->magic == MH_MAGIC_64)
+				if (list->magic == MH_MAGIC_64 || list->magic == MH_CIGAM_64)
 					ft_printf("%16c ", ' ');
-				else if (list->magic == MH_MAGIC)
+				else if (list->magic == MH_MAGIC || list->magic == MH_CIGAM)
 					ft_printf("%8c ", ' ');
 			}
 			if (!opt.u)

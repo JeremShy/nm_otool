@@ -3,32 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   unmap_binary.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcamhi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:42:03 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/24 15:42:10 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/24 19:25:46 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libbinary.h>
 
-int	unmap_binary(const char *file, void *addr)
+int	unmap_binary(void *addr, off_t size)
 {
-	int			fd;
-	struct stat	buf;
-
-	if ((fd = open(file, O_RDONLY)) < 0)
+	if (munmap(addr, size) == -1)
 		return (-1);
-	if (fstat(fd, &buf) < 0)
-	{
-		close(fd);
-		return (-1);
-	}
-	if (munmap(addr, buf.st_size) == -1)
-	{
-		close(fd);
-		return (-1);
-	}
-	close(fd);
 	return (0);
 }

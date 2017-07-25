@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   otool.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcamhi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:38:12 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/24 15:38:35 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/24 22:28:17 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct	s_data
 	char		*sections;
 	uint32_t	nbsect;
 	uint32_t	end;
+	off_t	size;
 	const char	*av;
 }				t_data;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcamhi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:37:59 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/24 15:38:02 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 00:13:49 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ typedef struct	s_data
 	char		*sections;
 	uint32_t	nbsect;
 	uint32_t	end;
+	off_t	size;
 	const char	*av;
+	int		endiancast;
+	int		error;
 }				t_data;
 
 typedef struct	s_opt
@@ -61,10 +64,12 @@ typedef struct	s_opt
 	int	um;
 }				t_opt;
 
-void			find_boundaries_64(t_data *data, uint64_t offset);
 void			find_boundaries_32(t_data *data, uint64_t offset);
+void			find_boundaries_64(t_data *data, uint64_t offset);
+void			find_boundaries_ppc(t_data *data, uint64_t offset);
 void			handle_32(t_data *data, uint64_t offset, size_t poids);
 void			handle_64(t_data *data, uint64_t offset, size_t poids);
+void			handle_ppc(t_data *data, uint64_t offset, size_t poids);
 void			create_list_64(t_data *data, size_t poids);
 void			create_list_32(t_data *data, size_t poids);
 t_symbole		*create_elem(t_data *data, uint64_t offset, size_t poids);
@@ -77,7 +82,10 @@ void			delete_list(t_symbole *list);
 t_symbole		*ft_sort(t_symbole *list);
 void			handle_fat_cigam(t_data *data, t_opt opt);
 void			handle_static_lib(t_data *data, uint32_t offset, t_opt opt);
-t_opt			ft_parsing(int ac, char **av);
+int				ft_parsing(int ac, char **av, t_opt *opt);
 int				find_start(int ac, char **av);
+int64_t	get_good_endian(t_data data, int64_t nbr);
+int	get_good_endianu(t_data data, uint64_t nbr);
+// int	try_to_assign(void **ptr, void *value, t_data *data);
 
 #endif

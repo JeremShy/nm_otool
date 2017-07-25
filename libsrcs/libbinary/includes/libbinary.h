@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libbinary.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcamhi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:42:52 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/24 15:42:53 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/24 21:15:26 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@
 # include <mach-o/fat.h>
 # include <mach-o/ranlib.h>
 
-char	*map_binary(const char *file);
-int		unmap_binary(const char *file, void *addr);
+char	*map_binary(const char *file, off_t *size);
+int		unmap_binary(void *addr, off_t size);
+void	*convert_chunk_alloc(void *binary, size_t size);
+int64_t		convert_chunk(void *binary);
+uint64_t	convert_chunk_u(void *binary);
 
 #endif
