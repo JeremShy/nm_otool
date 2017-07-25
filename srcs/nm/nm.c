@@ -6,29 +6,36 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:36:01 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 13:15:01 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 15:26:13 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <nm.h>
 
-void	do_nm(const char *file, t_opt opt)
+static int	init_data(t_data *data, const char *file)
+{
+	data->binary = map_binary(file, &(data->size));
+	if (!data->binary)
+	{
+		ft_putstr_fd("Error !!!\n", 2);
+		return (0);
+	}
+	data->tend = data->binary + data->size;
+	data->error = 0;
+	data->list = NULL;
+	data->sections = NULL;
+	data->av = file;
+	data->endiancast = 0;
+	data->magic = *(uint32_t*)(data->binary);
+	return (1);
+}
+
+void		do_nm(const char *file, t_opt opt)
 {
 	t_data			data;
 
-	data.binary = map_binary(file, &(data.size));
-	if (!data.binary)
-	{
-		ft_putstr_fd("Error !!!\n", 2);
+	if (!init_data(&data, file))
 		return ;
-	}
-	data.tend = data.binary + data.size;
-	data.error = 0;
-	data.list = NULL;
-	data.sections = NULL;
-	data.av = file;
-	data.endiancast = 0;
-	data.magic = *(uint32_t*)(data.binary);
 	if (data.magic == MH_MAGIC_64)
 		handle_64(&data, 0, 0);
 	else if (data.magic == MH_MAGIC)
@@ -52,7 +59,7 @@ void	do_nm(const char *file, t_opt opt)
 	unmap_binary(data.binary, data.size);
 }
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	int		i;
 	t_opt	opt;
