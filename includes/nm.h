@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:37:59 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 15:14:01 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 15:54:15 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ int	fat_handle_64(t_data *data, struct fat_arch *arch, size_t poids, t_opt opt);
 int	fat_handle_ppc(t_data *data, struct fat_arch *arch, size_t poids, t_opt opt);
 int	handle_fat_arch(t_data *data, struct fat_arch *arch, size_t poids, t_opt opt);
 void	set_error_and_return(t_data *data);
+int		handle_obj_sl(t_data *data, uint32_t offset, uint32_t max, t_opt opt);
 
 #endif
