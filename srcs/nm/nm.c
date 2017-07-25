@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:36:01 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 18:57:22 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 19:00:55 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,35 @@ static int	init_data(t_data *data, const char *file)
 	return (1);
 }
 
+void		exec_good_handle(t_data *data, t_opt *opt)
+{
+	if (data->magic == MH_MAGIC_64)
+		handle_64(data, 0, 0);
+	else if (data->magic == MH_MAGIC)
+		handle_32(data, 0, 0);
+	else if (data->magic == MH_CIGAM)
+	{
+		data->endiancast = 1;
+		handle_32(data, 0, 0);
+	}
+	else if (data->magic == MH_CIGAM_64)
+	{
+		data->endiancast = 1;
+		handle_64(data, 0, 0);
+	}
+	else if (data->magic == FAT_CIGAM)
+		handle_fat_cigam(data, *opt);
+	else if (ft_strnequ((char*)data->binary, ARMAG, SARMAG))
+		handle_static_lib(data, 0, *opt);
+}
+
 void		do_nm(const char *file, t_opt opt)
 {
 	t_data			data;
 
 	if (!init_data(&data, file))
 		return ;
-	if (data.magic == MH_MAGIC_64)
-		handle_64(&data, 0, 0);
-	else if (data.magic == MH_MAGIC)
-		handle_32(&data, 0, 0);
-	else if (data.magic == MH_CIGAM)
-	{
-		data.endiancast = 1;
-		handle_32(&data, 0, 0);
-	}
-	else if (data.magic == MH_CIGAM_64)
-	{
-		data.endiancast = 1;
-		handle_64(&data, 0, 0);
-	}
-	else if (data.magic == FAT_CIGAM)
-		handle_fat_cigam(&data, opt);
-	else if (ft_strnequ((char*)data.binary, ARMAG, SARMAG))
-		handle_static_lib(&data, 0, opt);
+	exec_good_handle(&data, &opt);
 	if (data.error)
 	{
 		ft_putstr_fd("Error !!!\n", 2);

@@ -6,7 +6,7 @@
 #    By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/06 15:15:02 by jcamhi            #+#    #+#              #
-#    Updated: 2017/07/25 18:23:00 by jcamhi           ###   ########.fr        #
+#    Updated: 2017/07/25 19:00:38 by jcamhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SRC_NAME_OT = otool.c \
 								fat.c \
 								static_lib.c \
 								utils.c \
-								fat_fln.c
+								fat_fln.c \
+								static_lib_2.c
 
 OBJ_PATH_NM = ./objnm/
 OBJ_PATH_OT = ./objot/

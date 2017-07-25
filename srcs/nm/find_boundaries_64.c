@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:35:56 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 18:53:40 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 18:58:29 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,11 @@ int			find_boundaries_64(t_data *data, uint64_t offset)
 	if ((void*)lc > data->tend)
 		return (0);
 	data->nbsect = 0;
-	if (!(data->sections = (char*)malloc(get_good_endian(*data, header->ncmds) * 20 + 1)))
+	if (!(data->sections = (char*)malloc(get_good_endian(*data,
+		header->ncmds) * 20 + 1)))
 		return (0);
-	data->sections = ft_memset(data->sections, 'S', get_good_endian(*data, header->ncmds) * 20);
+	data->sections = ft_memset(data->sections, 'S', get_good_endian(*data,
+		header->ncmds) * 20);
 	data->sections[get_good_endian(*data, header->ncmds)] = '\0';
 	return (fill_data_sections_64(data, header, lc));
 }
