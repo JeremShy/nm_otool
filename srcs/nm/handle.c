@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:35:58 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 15:24:13 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 18:55:25 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 static void	create_list_from_sc64(t_data *data, int poids,
 		struct symtab_command *sc, uint64_t offset)
 {
-	data->symoff = sc->symoff + offset;
-	data->stroff = sc->stroff + offset;
-	data->strsize = sc->strsize;
-	data->nsyms = sc->nsyms;
+	data->symoff = get_good_endian(*data, sc->symoff) + offset;
+	data->stroff = get_good_endian(*data, sc->stroff) + offset;
+	data->strsize = get_good_endian(*data, sc->strsize);
+	data->nsyms = get_good_endian(*data, sc->nsyms);
 	if (create_list_64(data, poids) == 0)
 		data->error = 1;
 	return ;
@@ -38,12 +38,12 @@ void		handle_64(t_data *data, uint64_t offset, size_t poids)
 		return (set_error_and_return(data));
 	while (i < header->ncmds)
 	{
-		if (lc->cmd == LC_SYMTAB)
+		if (get_good_endian(*data, lc->cmd) == LC_SYMTAB)
 		{
 			return (create_list_from_sc64(data, poids,
 				(struct symtab_command*)lc, offset));
 		}
-		lc = (void*)lc + lc->cmdsize;
+		lc = (void*)lc + get_good_endian(*data, lc->cmdsize);
 		if ((void*)lc > data->tend)
 			return (set_error_and_return(data));
 		i++;

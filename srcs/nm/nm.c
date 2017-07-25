@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:36:01 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 15:26:13 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 18:57:22 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,16 @@ void		do_nm(const char *file, t_opt opt)
 		handle_64(&data, 0, 0);
 	else if (data.magic == MH_MAGIC)
 		handle_32(&data, 0, 0);
+	else if (data.magic == MH_CIGAM)
+	{
+		data.endiancast = 1;
+		handle_32(&data, 0, 0);
+	}
+	else if (data.magic == MH_CIGAM_64)
+	{
+		data.endiancast = 1;
+		handle_64(&data, 0, 0);
+	}
 	else if (data.magic == FAT_CIGAM)
 		handle_fat_cigam(&data, opt);
 	else if (ft_strnequ((char*)data.binary, ARMAG, SARMAG))

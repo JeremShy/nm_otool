@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:35:56 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 14:36:22 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 18:53:40 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static int	handle_seg_header_64(t_data *data, struct load_command *lc,
 	tab = (void*)sc + sizeof(struct segment_command_64);
 	if ((void*)sc > data->tend || (void*)tab > data->tend)
 		return (-1);
-	if (sc->nsects == 0)
+	if (get_good_endian(*data, sc->nsects) == 0)
 		return (i);
-	while (j < sc->nsects)
+	while (j < get_good_endian(*data, sc->nsects))
 	{
 		data->nbsect++;
 		if (get_good_sign_64(data, tab, i, j) == -1)
@@ -60,15 +60,15 @@ int			fill_data_sections_64(t_data *data, struct mach_header_64 *header,
 
 	i = 0;
 	j = 0;
-	while (i < header->ncmds)
+	while (i < get_good_endian(*data, header->ncmds))
 	{
-		if (lc->cmd == LC_SEGMENT_64)
+		if (get_good_endian(*data, lc->cmd) == LC_SEGMENT_64)
 		{
 			j = handle_seg_header_64(data, lc, j);
 			if (j == -1)
 				return (0);
 		}
-		lc = (void*)lc + lc->cmdsize;
+		lc = (void*)lc + get_good_endian(*data, lc->cmdsize);
 		if ((void*)lc > data->tend)
 			return (0);
 		i++;
@@ -86,9 +86,9 @@ int			find_boundaries_64(t_data *data, uint64_t offset)
 	if ((void*)lc > data->tend)
 		return (0);
 	data->nbsect = 0;
-	if (!(data->sections = (char*)malloc(header->ncmds * 20 + 1)))
+	if (!(data->sections = (char*)malloc(get_good_endian(*data, header->ncmds) * 20 + 1)))
 		return (0);
-	data->sections = ft_memset(data->sections, 'S', header->ncmds * 20);
-	data->sections[header->ncmds] = '\0';
+	data->sections = ft_memset(data->sections, 'S', get_good_endian(*data, header->ncmds) * 20);
+	data->sections[get_good_endian(*data, header->ncmds)] = '\0';
 	return (fill_data_sections_64(data, header, lc));
 }
