@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:36:02 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/24 22:29:58 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 15:27:34 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int				find_start(int ac, char **av)
 	return (i);
 }
 
-int			check_validity(char *av)
+int				check_validity(char *av)
 {
 	int	i;
 
@@ -67,7 +67,7 @@ void			norme_parsing(int i, char **av, t_opt *options)
 		options->um = 1;
 }
 
-int			ft_parsing(int ac, char **av, t_opt *opt)
+int				ft_parsing(int ac, char **av, t_opt *opt)
 {
 	int		i;
 	int		cont;
