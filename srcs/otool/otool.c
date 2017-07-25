@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:36:45 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 18:01:15 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 18:28:24 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ void	do_otool_on_archive(const char *file, t_data *data)
 	handle_static_lib(data, 0);
 }
 
+void	init_data(t_data *data, const char *file)
+{
+	data->tend = data->binary + data->size;
+	data->av = file;
+	data->error = 0;
+	data->endiancast = 0;
+	data->magic = *(uint32_t*)(data->binary);
+}
+
 void	do_otool(const char *file)
 {
 	t_data	data;
@@ -25,11 +34,7 @@ void	do_otool(const char *file)
 	data.binary = map_binary(file, &(data.size));
 	if (!data.binary)
 		return ;
-	data.tend = data.binary + data.size;
-	data.av = file;
-	data.error = 0;
-	data.endiancast = 0;
-	data.magic = *(uint32_t*)(data.binary);
+	init_data(&data, file);
 	if (data.magic == MH_MAGIC_64)
 	{
 		ft_printf("%s:\n", file);
