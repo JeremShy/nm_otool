@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   static_lib.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcamhi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:36:47 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/24 15:36:49 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 18:00:53 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,16 @@ static void		handle_obj_sl(t_data *data, uint32_t offset, uint32_t max)
 	{
 		ft_printf("%s(%s):\n", data->av, hdr + 1);
 		obj = (void*)(hdr + 1);
+		if ((void*)hdr > data->tend || (void*)obj > data->tend)
+			return (set_error_and_return(data));
 		data->magic = *(uint32_t*)(obj);
-		while (data->magic != MH_MAGIC_64 && data->magic != MH_MAGIC)
+		while (data->magic != MH_MAGIC_64 && data->magic != MH_MAGIC && obj < data->tend)
 		{
 			obj = (void*)obj + 1;
 			data->magic = *(uint32_t*)(obj);
 		}
+		if (obj >= data->tend)
+			return (set_error_and_return(data));
 		if (data->magic == MH_MAGIC_64)
 			handle_64(data, obj - data->binary);
 		else if (data->magic == MH_MAGIC)
@@ -43,9 +47,14 @@ uint32_t		find_first_obj(t_data *data, uint32_t offset)
 	void	*obj;
 
 	obj = data->binary + offset;
-	while (!ft_strnequ(obj, "  `\n", 4))
+	while (!ft_strnequ(obj, "  `\n", 4) && obj <= data->tend)
 	{
 		obj++;
+	}
+	if (obj > data->tend)
+	{
+		data->error = 1;
+		return (0);
 	}
 	return (obj + 4 - data->binary - sizeof(struct ar_hdr));
 }
@@ -55,6 +64,8 @@ static int		handle_weird_lib(t_data *data, struct ranlib *symtab)
 	uint32_t		min;
 
 	min = find_first_obj(data, (void*)symtab - data->binary);
+	if (data->error)
+		return (0);
 	handle_obj_sl(data, min, data->end - 1);
 	return (1);
 }
@@ -71,6 +82,8 @@ void			handle_static_lib(t_data *data, uint32_t offset)
 		+ sizeof(char[20]));
 	symtab = data->binary + offset + SARMAG + sizeof(struct ar_hdr)
 		+ sizeof(char[20]) + sizeof(uint32_t);
+	if ((void*)nbr > data->tend || (void*)symtab > data->tend)
+		return (set_error_and_return(data));
 	start = symtab;
 	min = 0;
 	max = 0;
@@ -78,6 +91,8 @@ void			handle_static_lib(t_data *data, uint32_t offset)
 		return ;
 	while ((void*)symtab < (void*)start + *nbr)
 	{
+		if ((void*)symtab > data->tend)
+			return (set_error_and_return(data));
 		if (min == 0 || symtab->ran_off < min)
 			min = symtab->ran_off;
 		if (symtab->ran_off > max)

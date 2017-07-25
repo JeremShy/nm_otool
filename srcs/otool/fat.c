@@ -3,40 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   fat.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcamhi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:36:42 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/24 15:36:43 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 18:07:04 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <otool.h>
 
-void		*convert_chunk(void *binary, size_t size)
+void	print_head(cpu_type_t cputype, const char *filename)
 {
-	char		*ret;
-	char		*bc;
-	char		*tmp;
-	size_t		i;
-
-	ret = (char*)malloc(size);
-	bc = (char*)binary;
-	tmp = ret;
-	i = 0;
-	while (i < size)
-	{
-		*(tmp + 0) = *(bc + 3);
-		*(tmp + 1) = *(bc + 2);
-		*(tmp + 2) = *(bc + 1);
-		*(tmp + 3) = *(bc + 0);
-		tmp += 4;
-		bc += 4;
-		i += 4;
-	}
-	return (ret);
+	if (cputype == CPU_TYPE_I386)
+		ft_printf("%s (architecture i386):\n", filename);
+	if (cputype == CPU_TYPE_X86_64)
+		ft_printf("%s (architecture X86_64):\n", filename);
+	if (cputype == CPU_TYPE_POWERPC)
+		ft_printf("%s (architecture ppc):\n", filename);
 }
 
-static void	handle_fat_arch_32(t_data *data, struct fat_arch *arch)
+
+static void	handle_fat_arch_32(t_data *data, struct fat_arch *arch, int p)
 {
 	if (ft_strnequ((char*)data->binary + arch->offset, ARMAG, SARMAG))
 	{
@@ -46,18 +33,19 @@ static void	handle_fat_arch_32(t_data *data, struct fat_arch *arch)
 	}
 	else
 	{
-		ft_printf("%s:\n", data->av);
+		if (p)
+			ft_printf("%s:\n", data->av);
 		handle_32(data, arch->offset);
 	}
 }
 
-void		handle_fat_arch(t_data *data, struct fat_arch *arch)
+void		handle_fat_arch(t_data *data, struct fat_arch *arch, int p)
 {
+	if (arch->offset > data->size)
+		return (set_error_and_return(data));
 	data->magic = *(uint32_t*)(data->binary + arch->offset);
 	if (arch->cputype == CPU_TYPE_I386)
-	{
-		handle_fat_arch_32(data, arch);
-	}
+		handle_fat_arch_32(data, arch, p);
 	else if (arch->cputype == CPU_TYPE_X86_64)
 	{
 		if (ft_strnequ((char*)data->binary + arch->offset, ARMAG, SARMAG))
@@ -68,10 +56,37 @@ void		handle_fat_arch(t_data *data, struct fat_arch *arch)
 		}
 		else
 		{
-			ft_printf("%s:\n", data->av);
+			if (p)
+				ft_printf("%s:\n", data->av);
 			handle_64(data, arch->offset);
 		}
 	}
+	else if (arch->cputype == CPU_TYPE_POWERPC)
+	{
+		if (p)
+			ft_printf("%s:\n", data->av);
+		data->endiancast = 1;
+		handle_32(data, arch->offset);
+	}
+}
+
+int	print_all_arches(t_data *data, size_t nbr, void *data_cigam)
+{
+	size_t	i;
+	struct fat_arch		*arch;
+
+	i = 0;
+	while (i < nbr)
+	{
+		arch = (struct fat_arch*)data_cigam + i;
+		print_head(arch->cputype, data->av);
+		data->endiancast = 0;
+		handle_fat_arch(data, arch, 0);
+		if (data->error)
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 void		handle_fat(t_data *data)
@@ -82,22 +97,26 @@ void		handle_fat(t_data *data)
 	size_t				i;
 	size_t				nbr;
 
-	data_cigam = convert_chunk(data->binary, sizeof(struct fat_header));
+	data_cigam = convert_chunk_alloc(data->binary, sizeof(struct fat_header));
 	header = (struct fat_header*)data_cigam;
 	i = 0;
 	nbr = header->nfat_arch;
 	free(data_cigam);
-	data_cigam = convert_chunk(data->binary + sizeof(struct fat_header),
+	data_cigam = convert_chunk_alloc(data->binary + sizeof(struct fat_header),
 			nbr * sizeof(struct fat_arch));
 	while (i < nbr)
 	{
 		arch = (struct fat_arch*)data_cigam + i;
+		if ((void*)arch > data_cigam + data->size)
+			return (set_error_and_return(data));
 		if (arch->cputype == CPUTYPE)
 		{
-			handle_fat_arch(data, arch);
+			handle_fat_arch(data, arch, 1);
 			free(data_cigam);
 			return ;
 		}
 		i++;
 	}
+	if (print_all_arches(data, nbr, data_cigam) == 0)
+		data->error = 1;
 }

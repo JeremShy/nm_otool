@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:36:45 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/24 20:52:18 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 18:01:15 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ void	do_otool(const char *file)
 	data.binary = map_binary(file, &(data.size));
 	if (!data.binary)
 		return ;
+	data.tend = data.binary + data.size;
 	data.av = file;
+	data.error = 0;
+	data.endiancast = 0;
 	data.magic = *(uint32_t*)(data.binary);
 	if (data.magic == MH_MAGIC_64)
 	{
@@ -44,6 +47,8 @@ void	do_otool(const char *file)
 	else if (ft_strnequ((char*)data.binary, ARMAG, SARMAG))
 		do_otool_on_archive(file, &data);
 	unmap_binary(data.binary, data.size);
+	if (data.error)
+		ft_putstr_fd("error\n", 2);
 }
 
 int		main(int ac, char **av)

@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:38:12 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/24 22:28:17 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 17:39:52 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,12 @@ typedef struct	s_data
 	uint32_t	nsyms;
 	char		*sections;
 	uint32_t	nbsect;
+	void			*tend;
 	uint32_t	end;
 	off_t	size;
 	const char	*av;
+	int		endiancast;
+	int		error;
 }				t_data;
 
 void			handle_64(t_data *data, uint64_t offset);
@@ -49,5 +52,7 @@ void			print(t_data *data, void *start, uint64_t size,
 		uint64_t print_size);
 void			handle_fat(t_data *data);
 void			handle_static_lib(t_data *data, uint32_t offset);
-
+int64_t		get_good_endian(t_data data, int64_t nbr);
+int				get_good_endianu(t_data data, uint64_t nbr);
+void			set_error_and_return(t_data *data);
 #endif

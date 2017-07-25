@@ -6,7 +6,7 @@
 #    By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/06 15:15:02 by jcamhi            #+#    #+#              #
-#    Updated: 2017/07/25 15:51:31 by jcamhi           ###   ########.fr        #
+#    Updated: 2017/07/25 16:46:23 by jcamhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRC_NAME_OT = otool.c \
 								handle.c \
 								print.c \
 								fat.c \
-								static_lib.c
+								static_lib.c \
+								utils.c
 
 OBJ_PATH_NM = ./objnm/
 OBJ_PATH_OT = ./objot/
@@ -64,7 +65,7 @@ OBJ_NAME_OT = $(SRC_NAME_OT:.c=.o)
 INC = $(addprefix -I,$(INC_PATH))
 
 
-all : $(NAME_NM) $(SYM_NAME)
+all : $(NAME_NM) $(NAME_OT) $(SYM_NAME)
 
 $(NAME_NM) : $(OBJ_NM)
 	@mkdir -p $(LIB_DIR)
