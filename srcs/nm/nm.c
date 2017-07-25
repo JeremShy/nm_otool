@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:36:01 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 00:35:18 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 13:15:01 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	do_nm(const char *file, t_opt opt)
 		ft_putstr_fd("Error !!!\n", 2);
 		return ;
 	}
+	data.tend = data.binary + data.size;
 	data.error = 0;
 	data.list = NULL;
 	data.sections = NULL;

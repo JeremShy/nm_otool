@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:35:49 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/24 23:45:17 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 13:15:16 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ t_symbole	*init_symbole_for_64(t_data *data, uint64_t offset, t_symbole *ret)
 	char			*strings;
 
 	strings =  data->binary + data->stroff;
-	if ((void*)strings > data->binary + data->size)
+	if ((void*)strings > data->tend)
 		return (NULL);
 	nl =  (data->binary + offset);
 	if ((ret->n_strx = (int64_t)nl->n_un.n_strx) != 0)
 	{
-		if ((void*)(strings + ret->n_strx) > data->binary + data->size)
+		if ((void*)(strings + ret->n_strx) > data->tend)
 			return (NULL);
 		ret->str = ft_strdup(strings + ret->n_strx);
 	}
@@ -92,14 +92,14 @@ t_symbole	*init_symbole_for_32(t_data *data, uint64_t offset, t_symbole *ret)
 	char			*strings;
 
 	strings = data->binary + data->stroff;
-	if ((void*)strings > data->binary + data->size)
+	if ((void*)strings > data->tend)
 		return (NULL);
 	nl = data->binary + offset;
-	if ((void*)nl > data->binary + data->size)
+	if ((void*)nl > data->tend)
 		return (NULL);
 	if ((ret->n_strx = get_good_endian(*data, (int64_t)nl->n_un.n_strx)) != 0)
 	{
-		if ((void*)(strings + ret->n_strx) > data->binary + data->size)
+		if ((void*)(strings + ret->n_strx) > data->tend)
 			return (NULL);
 		ret->str = ft_strdup(strings + ret->n_strx);
 	}

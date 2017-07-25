@@ -6,31 +6,25 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:35:52 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 00:44:26 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 13:19:40 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <nm.h>
 
-void	handle_fat_arch(t_data *data, struct fat_arch *arch, size_t poids,
+int	handle_fat_arch(t_data *data, struct fat_arch *arch, size_t poids,
 	t_opt opt)
 {
-	if (data->binary + arch->offset > data->binary + data->size)
-	{
-		data->error = 1;
-		return ;
-	}
+	if (data->binary + arch->offset > data->tend)
+		return (0);
 	data->magic = *(uint32_t*)(data->binary + arch->offset);
 	if (arch->cputype == CPU_TYPE_I386)
 	{
 		if (ft_strnequ((char*)data->binary + arch->offset, ARMAG, SARMAG))
 		{
 			data->end = arch->offset + arch->size;
-			if (data->end > (uint32_t)data->binary + data->size)
-			{
-				data->error = 1;
-				return ;
-			}
+			if (data->end > (uint32_t)data->tend)
+				return (0);
 			handle_static_lib(data, arch->offset, opt);
 		}
 		else
@@ -41,11 +35,8 @@ void	handle_fat_arch(t_data *data, struct fat_arch *arch, size_t poids,
 		if (ft_strnequ((char*)data->binary + arch->offset, ARMAG, SARMAG))
 		{
 			data->end = arch->offset + arch->size;
-			if (data->end > (uint32_t)data->binary + data->size)
-			{
-				data->error = 1;
-				return ;
-			}
+			if (data->end > (uint32_t)data->tend)
+				return (0);
 			handle_static_lib(data, arch->offset, opt);
 		}
 		else
@@ -57,16 +48,14 @@ void	handle_fat_arch(t_data *data, struct fat_arch *arch, size_t poids,
 		if (ft_strnequ((char*)data->binary + arch->offset, ARMAG, SARMAG))
 		{
 			data->end = arch->offset + arch->size;
-			if (data->end > (uint32_t)data->binary + data->size)
-			{
-				data->error = 1;
-				return ;
-			}
+			if (data->end > (uint32_t)data->tend)
+				return (0);
 			handle_static_lib(data, arch->offset, opt);
 		}
 		else
 			handle_32(data, arch->offset, poids);
 	}
+	return (1);
 }
 
 void	print_head(cpu_type_t cputype, const char *filename)
@@ -85,7 +74,7 @@ void	print_all_arches(t_data *data, t_opt opt, size_t nbr)
 	struct fat_arch	*arch;
 	size_t	i;
 
-	if (data->binary + sizeof(struct fat_header) > data->binary + data->size)
+	if (data->binary + sizeof(struct fat_header) > data->tend)
 	{
 		data->error = 1;
 		return ;
@@ -142,7 +131,8 @@ void	handle_fat_cigam(t_data *data, t_opt opt)
 		}
 		if (arch->cputype == CPUTYPE)
 		{
-			handle_fat_arch(data, arch, i, opt);
+			if (!handle_fat_arch(data, arch, i, opt))
+				data->error = 1;
 			free(data_cigam);
 			return ;
 		}

@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:37:59 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 00:13:49 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 13:21:08 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct	s_data
 	uint32_t	nbsect;
 	uint32_t	end;
 	off_t	size;
+	void			*tend;
 	const char	*av;
 	int		endiancast;
 	int		error;
@@ -64,14 +65,13 @@ typedef struct	s_opt
 	int	um;
 }				t_opt;
 
-void			find_boundaries_32(t_data *data, uint64_t offset);
-void			find_boundaries_64(t_data *data, uint64_t offset);
-void			find_boundaries_ppc(t_data *data, uint64_t offset);
+int				find_boundaries_32(t_data *data, uint64_t offset);
+int				find_boundaries_64(t_data *data, uint64_t offset);
 void			handle_32(t_data *data, uint64_t offset, size_t poids);
 void			handle_64(t_data *data, uint64_t offset, size_t poids);
 void			handle_ppc(t_data *data, uint64_t offset, size_t poids);
-void			create_list_64(t_data *data, size_t poids);
-void			create_list_32(t_data *data, size_t poids);
+int				create_list_64(t_data *data, size_t poids);
+int				create_list_32(t_data *data, size_t poids);
 t_symbole		*create_elem(t_data *data, uint64_t offset, size_t poids);
 void			add_elem_start(t_data *data, t_symbole **list, uint64_t offset,
 	size_t poids);

@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:35:55 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 00:45:30 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 13:21:10 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ static int	handle_seg_header_32(t_data *data, struct load_command *lc,
 	j = 0;
 	sc = (struct segment_command*)lc;
 	tab = (void*)sc + sizeof(struct segment_command);
-	if ((void*)sc > data->binary + data->size || (void*)tab > data->binary + data->size)
+	if ((void*)sc > data->tend || (void*)tab > data->tend)
 		return (-1);
 	if (get_good_endian(*data, sc->nsects) == 0)
 		return (i);
 	while (j < get_good_endian(*data, sc->nsects))
 	{
 		data->nbsect++;
-		if ((void*)(tab + j) > data->binary + data->size)
+		if ((void*)(tab + j) > data->tend)
 			return (-1);
 		if (ft_strequ(tab[j].sectname, "__text"))
 			data->sections[j + i] = 'T';
@@ -44,7 +44,7 @@ static int	handle_seg_header_32(t_data *data, struct load_command *lc,
 	return (i + j);
 }
 
-void		find_boundaries_32(t_data *data, uint64_t offset)
+int		find_boundaries_32(t_data *data, uint64_t offset)
 {
 	struct mach_header			*header;
 	struct load_command			*lc;
@@ -52,22 +52,16 @@ void		find_boundaries_32(t_data *data, uint64_t offset)
 	int32_t					j;
 
 	header = (struct mach_header*)(data->binary + offset);
-	if ((void*)header > data->binary + data->size)
-	{
-		data->error = 1;
-		return ;
-	}
+	if ((void*)header > data->tend)
+		return (0);
 	lc = (void*)(header) + sizeof(*header);
-	if ((void*)lc > data->binary + data->size)
-	{
-		data->error = 1;
-		return ;
-	}
+	if ((void*)lc > data->tend)
+		return (0);
 	i = 0;
 	j = 0;
 	data->nbsect = 0;
 	if (!(data->sections = (char*)malloc(get_good_endian(*data, header->ncmds) + 50)))
-		return ;
+		return (0);
 	data->sections = ft_memset(data->sections, 'S', get_good_endian(*data, header->ncmds));
 	data->sections[get_good_endian(*data, header->ncmds)] = '\0';
 	while (i < get_good_endian(*data, header->ncmds))
@@ -75,16 +69,11 @@ void		find_boundaries_32(t_data *data, uint64_t offset)
 		if (get_good_endian(*data, lc->cmd) == LC_SEGMENT)
 			j = handle_seg_header_32(data, lc, j);
 		if (j == -1)
-		{
-			data->error = 1;
-			return ;
-		}
+			return (0);
 		lc = (void*)lc + get_good_endian(*data, lc->cmdsize);
-		if ((void*)lc > data->binary + data->size)
-		{
-			data->error = 1;
-			return ;
-		}
+		if ((void*)lc > data->tend)
+			return (0);
 		i++;
 	}
+	return (1);
 }
