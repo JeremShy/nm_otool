@@ -6,11 +6,22 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:36:47 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 18:00:53 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 18:42:31 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <otool.h>
+
+static void		*move_obj(t_data *data, void *obj)
+{
+	while (data->magic != MH_MAGIC_64 && data->magic != MH_MAGIC
+		&& obj < data->tend)
+	{
+		obj = (void*)obj + 1;
+		data->magic = *(uint32_t*)(obj);
+	}
+	return (obj);
+}
 
 static void		handle_obj_sl(t_data *data, uint32_t offset, uint32_t max)
 {
@@ -26,11 +37,7 @@ static void		handle_obj_sl(t_data *data, uint32_t offset, uint32_t max)
 		if ((void*)hdr > data->tend || (void*)obj > data->tend)
 			return (set_error_and_return(data));
 		data->magic = *(uint32_t*)(obj);
-		while (data->magic != MH_MAGIC_64 && data->magic != MH_MAGIC && obj < data->tend)
-		{
-			obj = (void*)obj + 1;
-			data->magic = *(uint32_t*)(obj);
-		}
+		obj = move_obj(data, obj);
 		if (obj >= data->tend)
 			return (set_error_and_return(data));
 		if (data->magic == MH_MAGIC_64)
@@ -48,9 +55,7 @@ uint32_t		find_first_obj(t_data *data, uint32_t offset)
 
 	obj = data->binary + offset;
 	while (!ft_strnequ(obj, "  `\n", 4) && obj <= data->tend)
-	{
 		obj++;
-	}
 	if (obj > data->tend)
 	{
 		data->error = 1;
@@ -84,19 +89,15 @@ void			handle_static_lib(t_data *data, uint32_t offset)
 		+ sizeof(char[20]) + sizeof(uint32_t);
 	if ((void*)nbr > data->tend || (void*)symtab > data->tend)
 		return (set_error_and_return(data));
-	start = symtab;
-	min = 0;
-	max = 0;
+	init_sl(&min, &max, &start, symtab);
 	if (*nbr == 0 && handle_weird_lib(data, symtab))
 		return ;
 	while ((void*)symtab < (void*)start + *nbr)
 	{
 		if ((void*)symtab > data->tend)
 			return (set_error_and_return(data));
-		if (min == 0 || symtab->ran_off < min)
-			min = symtab->ran_off;
-		if (symtab->ran_off > max)
-			max = symtab->ran_off;
+		min = ((min == 0 || symtab->ran_off < min) ? symtab->ran_off : min);
+		max = ((symtab->ran_off > max) ? symtab->ran_off : max);
 		symtab++;
 	}
 	handle_obj_sl(data, min + offset, max + offset);

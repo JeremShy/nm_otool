@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:38:12 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 18:22:43 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 18:41:53 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,6 @@ int64_t		get_good_endian(t_data data, int64_t nbr);
 int				get_good_endianu(t_data data, uint64_t nbr);
 void			set_error_and_return(t_data *data);
 void	fat_fln(size_t *i, struct fat_header **header, void *data_cigam);
+void	init_sl(uint32_t *min, uint32_t *max, struct ranlib **start,
+	struct ranlib *symtab);
 #endif
