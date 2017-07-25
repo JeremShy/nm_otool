@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:37:59 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 14:12:11 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 15:14:01 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,6 @@ int	fat_handle_32(t_data *data, struct fat_arch *arch, size_t poids, t_opt opt);
 int	fat_handle_64(t_data *data, struct fat_arch *arch, size_t poids, t_opt opt);
 int	fat_handle_ppc(t_data *data, struct fat_arch *arch, size_t poids, t_opt opt);
 int	handle_fat_arch(t_data *data, struct fat_arch *arch, size_t poids, t_opt opt);
-// int	try_to_assign(void **ptr, void *value, t_data *data);
+void	set_error_and_return(t_data *data);
 
 #endif
