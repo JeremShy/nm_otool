@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:37:59 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 13:21:08 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 13:59:20 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ int				ft_parsing(int ac, char **av, t_opt *opt);
 int				find_start(int ac, char **av);
 int64_t	get_good_endian(t_data data, int64_t nbr);
 int	get_good_endianu(t_data data, uint64_t nbr);
+int	fat_handle_32(t_data *data, struct fat_arch *arch, size_t poids, t_opt opt);
+int	fat_handle_64(t_data *data, struct fat_arch *arch, size_t poids, t_opt opt);
+int	fat_handle_ppc(t_data *data, struct fat_arch *arch, size_t poids, t_opt opt);
 // int	try_to_assign(void **ptr, void *value, t_data *data);
 
 #endif

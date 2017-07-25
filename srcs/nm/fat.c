@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:35:52 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 13:19:40 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 14:04:02 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,42 +19,11 @@ int	handle_fat_arch(t_data *data, struct fat_arch *arch, size_t poids,
 		return (0);
 	data->magic = *(uint32_t*)(data->binary + arch->offset);
 	if (arch->cputype == CPU_TYPE_I386)
-	{
-		if (ft_strnequ((char*)data->binary + arch->offset, ARMAG, SARMAG))
-		{
-			data->end = arch->offset + arch->size;
-			if (data->end > (uint32_t)data->tend)
-				return (0);
-			handle_static_lib(data, arch->offset, opt);
-		}
-		else
-			handle_32(data, arch->offset, poids);
-	}
+		return (fat_handle_32(data, arch, poids, opt));
 	else if (arch->cputype == CPU_TYPE_X86_64)
-	{
-		if (ft_strnequ((char*)data->binary + arch->offset, ARMAG, SARMAG))
-		{
-			data->end = arch->offset + arch->size;
-			if (data->end > (uint32_t)data->tend)
-				return (0);
-			handle_static_lib(data, arch->offset, opt);
-		}
-		else
-			handle_64(data, arch->offset, poids);
-	}
+		return (fat_handle_64(data, arch, poids, opt));
 	else if (arch->cputype == CPU_TYPE_POWERPC)
-	{
-		data->endiancast = 1;
-		if (ft_strnequ((char*)data->binary + arch->offset, ARMAG, SARMAG))
-		{
-			data->end = arch->offset + arch->size;
-			if (data->end > (uint32_t)data->tend)
-				return (0);
-			handle_static_lib(data, arch->offset, opt);
-		}
-		else
-			handle_32(data, arch->offset, poids);
-	}
+		return (fat_handle_ppc(data, arch, poids, opt));
 	return (1);
 }
 

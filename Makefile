@@ -6,7 +6,7 @@
 #    By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/06 15:15:02 by jcamhi            #+#    #+#              #
-#    Updated: 2017/07/24 21:17:49 by jcamhi           ###   ########.fr        #
+#    Updated: 2017/07/25 13:55:36 by jcamhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRC_NAME_NM = nm.c \
 								create_list.c \
 								static_lib.c \
 								opt.c \
-								utils.c
+								utils.c \
+								fat_handle.c
 
 SRC_NAME_OT = otool.c \
 								handle.c \
