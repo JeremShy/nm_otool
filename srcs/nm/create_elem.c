@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:35:49 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 13:15:16 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 13:52:48 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ t_symbole	*init_symbole_for_64(t_data *data, uint64_t offset, t_symbole *ret)
 	struct nlist_64	*nl;
 	char			*strings;
 
-	strings =  data->binary + data->stroff;
+	strings = data->binary + data->stroff;
 	if ((void*)strings > data->tend)
 		return (NULL);
-	nl =  (data->binary + offset);
+	nl = (data->binary + offset);
 	if ((ret->n_strx = (int64_t)nl->n_un.n_strx) != 0)
 	{
 		if ((void*)(strings + ret->n_strx) > data->tend)

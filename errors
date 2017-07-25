@@ -1,1 +1,32 @@
+in /Users/jcamhi/pip/bin
+
+in /Users/jcamhi/Perso/py_api/venv/bin/python
+
+in /Users/jcamhi/platform-tools/
+
+in /Users/jcamhi/secu/john-1.8.0-jumbo-1/run
+
+in /Users/jcamhi/bin
+
+in /Users/jcamhi/node_bin/node_modules/nodemon/bin
+
+in /Users/jcamhi/node_bin/node_modules/express-generator/bin
+
+in /Users/jcamhi/.brew/bin
+
+in /Users/jcamhi/http/bin
+
 in /usr/bin
+ERROR while processing /usr/bin/python3-32
+ERROR while processing /usr/bin/python3.4-32
+
+in /bin
+
+in /usr/sbin
+
+in /sbin
+
+in /usr/local/bin
+
+in /usr/local/munki
+
