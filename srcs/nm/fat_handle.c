@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fat_handle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcamhi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 14:04:39 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 14:04:40 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 14:11:57 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,20 @@ int	fat_handle_ppc(t_data *data, struct fat_arch *arch, size_t poids, t_opt opt)
 	}
 	else
 		handle_32(data, arch->offset, poids);
+	return (1);
+}
+
+int	handle_fat_arch(t_data *data, struct fat_arch *arch, size_t poids,
+	t_opt opt)
+{
+	if (data->binary + arch->offset > data->tend)
+		return (0);
+	data->magic = *(uint32_t*)(data->binary + arch->offset);
+	if (arch->cputype == CPU_TYPE_I386)
+		return (fat_handle_32(data, arch, poids, opt));
+	else if (arch->cputype == CPU_TYPE_X86_64)
+		return (fat_handle_64(data, arch, poids, opt));
+	else if (arch->cputype == CPU_TYPE_POWERPC)
+		return (fat_handle_ppc(data, arch, poids, opt));
 	return (1);
 }
