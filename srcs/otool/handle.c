@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:36:44 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 18:11:35 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/25 18:26:40 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ void	handle_lc_seg_64(t_data *data, uint64_t offset, uint64_t tot_offset)
 			return (set_error_and_return(data));
 		if (ft_strequ(sect->sectname, "__text") && ft_strequ(sect->segname,
 				"__TEXT"))
-			print(data, data->binary + get_good_endian(*data, sect->offset) + tot_offset, get_good_endian(*data, sect->size),
-				sect->addr);
+			print(data, data->binary + get_good_endian(*data, sect->offset)
+				+ tot_offset, get_good_endian(*data, sect->size),
+				get_good_endian(*data, sect->addr));
 		sect++;
 		i++;
 	}
@@ -75,7 +76,8 @@ void	handle_lc_seg_32(t_data *data, uint64_t offset, uint64_t tot_offset)
 			return (set_error_and_return(data));
 		if (ft_strequ(sect->sectname, "__text") && ft_strequ(sect->segname,
 				"__TEXT"))
-			print(data, data->binary + get_good_endian(*data, sect->offset) + tot_offset, get_good_endian(*data, sect->size),
+			print(data, data->binary + get_good_endian(*data, sect->offset)
+				+ tot_offset, get_good_endian(*data, sect->size),
 				get_good_endian(*data, sect->addr));
 		sect++;
 		i++;
