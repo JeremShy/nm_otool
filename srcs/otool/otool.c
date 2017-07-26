@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:36:45 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 18:28:24 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/26 13:50:24 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,19 @@ void	init_data(t_data *data, const char *file)
 	data->magic = *(uint32_t*)(data->binary);
 }
 
-void	do_otool(const char *file)
+int		print_error_and_return(void)
+{
+	ft_putstr_fd("An error occured while mapping the binary\n", 2);
+	return (0);
+}
+
+int		do_otool(const char *file)
 {
 	t_data	data;
 
 	data.binary = map_binary(file, &(data.size));
 	if (!data.binary)
-		return ;
+		return (print_error_and_return());
 	init_data(&data, file);
 	if (data.magic == MH_MAGIC_64)
 	{
@@ -46,14 +52,13 @@ void	do_otool(const char *file)
 		handle_32(&data, 0);
 	}
 	else if (data.magic == FAT_CIGAM)
-	{
 		handle_fat(&data);
-	}
 	else if (ft_strnequ((char*)data.binary, ARMAG, SARMAG))
 		do_otool_on_archive(file, &data);
 	unmap_binary(data.binary, data.size);
 	if (data.error)
-		ft_putstr_fd("error\n", 2);
+		ft_putstr_fd("An error occured while analyzing the binary\n", 2);
+	return (1);
 }
 
 int		main(int ac, char **av)
@@ -69,7 +74,8 @@ int		main(int ac, char **av)
 		{
 			if (ac > 2)
 				ft_printf("\n%s:\n", av[i]);
-			do_otool(av[i]);
+			if (do_otool(av[i]) == 0)
+				return (0);
 			i++;
 		}
 	}

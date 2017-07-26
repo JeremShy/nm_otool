@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:36:01 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/25 19:00:55 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/07/26 13:48:11 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	init_data(t_data *data, const char *file)
 	data->binary = map_binary(file, &(data->size));
 	if (!data->binary)
 	{
-		ft_putstr_fd("Error !!!\n", 2);
+		ft_putstr_fd("An error occured while mapping the binary\n", 2);
 		return (0);
 	}
 	data->tend = data->binary + data->size;
@@ -57,11 +57,14 @@ void		do_nm(const char *file, t_opt opt)
 	t_data			data;
 
 	if (!init_data(&data, file))
+	{
+		ft_putstr_fd("An error occured while mapping the binary\n", 2);
 		return ;
+	}
 	exec_good_handle(&data, &opt);
 	if (data.error)
 	{
-		ft_putstr_fd("Error !!!\n", 2);
+		ft_putstr_fd("An error occured while analyzing the binary.\n", 2);
 		return ;
 	}
 	if (data.list)
