@@ -6,7 +6,7 @@
 /*   By: jcamhi <jcamhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 15:36:01 by jcamhi            #+#    #+#             */
-/*   Updated: 2017/07/26 13:48:11 by jcamhi           ###   ########.fr       */
+/*   Updated: 2017/08/04 13:32:12 by jcamhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void		do_nm(const char *file, t_opt opt)
 
 	if (!init_data(&data, file))
 	{
-		ft_putstr_fd("An error occured while mapping the binary\n", 2);
 		return ;
 	}
 	exec_good_handle(&data, &opt);
